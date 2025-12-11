@@ -943,3 +943,520 @@ Import traces:
 [01:15:51.706] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
 [01:15:51.706] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
 [01:15:51.706] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765454095731}
+[05:35:55.218] Server  LOG      ✓ Compiled in 555ms
+[05:35:55.519] Browser ERROR   ./Desktop/PredictWheel/app/page.tsx:280:6
+Parsing ecmascript source code failed
+  278 |     </div>
+  279 |   )
+> 280 |     </div >
+      |      ^^^^^^
+  281 |   )
+  282 | }
+  283 |
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
+    ./Desktop/PredictWheel/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
+    ./Desktop/PredictWheel/app/page.tsx [Server Component]
+[05:37:50.580] Server  LOG      ✓ Compiled in 290ms
+[05:38:07.582] Server  LOG      ✓ Compiled in 141ms
+[05:40:45.768] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/V92TFX color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/V92TFX","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765469989711}
+[05:41:55.440] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765470059384}
+[05:43:10.500] Server  LOG      ✓ Compiled in 150ms
+[05:44:07.757] Server  LOG      ✓ Compiled in 217ms
+[05:45:37.635] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:45:37.785] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[05:45:37.785] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[05:45:37.785] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765470281730}
+[05:45:51.390] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765470295330}
+[05:49:15.708] Server  LOG      ✓ Compiled in 160ms
+[05:50:08.355] Server  LOG      ✓ Compiled in 136ms
+[05:50:51.990] Browser LOG     Starting game...
+[05:50:51.990] Browser LOG     Theme ID: tous
+[05:50:52.141] Browser LOG     Cards found: 45
+[05:50:56.574] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:50:56.762] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <InnerLayoutRouter url="/game/YYTS7C" tree={[...]} params={{code:"YYTS7C"}} cacheNode={{lazyData:null, ...}} ...>
+      <SegmentViewNode type="page" pagePath="/Desktop/P...">
+        <SegmentTrieNode>
+        <GamePage>
+          <GameClient initialGameState={{...}}>
+            <GamePlay initialGameState={{...}}>
+              <div className="min-h-scre...">
+                <div>
+                <div className="relative m...">
+                  <div>
+                  <Card className="shadow-lg ...">
+                    <div data-slot="card" className="bg-card te...">
+                      <CardContent className="pt-8 pb-6">
+                        <div data-slot="card-content" className="px-6 pt-8 ...">
+                          <WavelengthWheel targetPosition={56} showTarget={true} showZones={false} guessPosition={90} ...>
+                            <div className="w-full mx-..." ref={{current:null}}>
+                              <svg viewBox="0 0 400 230" className="w-full h-a..." onMouseDown={function handleMouseDown} ...>
+                                <path>
+                                <path>
+                                <path>
+                                <line>
+                                <line>
+                                <line>
+                                <line>
+                                <line>
+                                <line>
+                                <line
+                                  x1={114.99999999999996}
++                                 y1={52.775681356645464}
+-                                 y1="52.775681356645435"
+                                  x2={112.49999999999996}
+                                  y2={48.44555433772325}
+                                  stroke="#94a3b8"
+                                  strokeWidth="1"
+                                >
+                                ...
+                                <g className="transition...">
+                                  <line
+                                    x1="200"
+                                    y1="205"
++                                   x2={113.32509996203426}
+-                                   x2="200"
++                                   y2={76.49917625396853}
+-                                   y2="50"
+                                    stroke="rgba(0,0,0,0.1)"
++                                   strokeWidth={4}
+-                                   strokeWidth="5"
+                                    strokeLinecap="round"
+                                  >
+                                  <line
+                                    x1="200"
+                                    y1="200"
++                                   x2={113.32509996203426}
+-                                   x2="200"
++                                   y2={71.49917625396853}
+-                                   y2="45"
++                                   stroke="#3b82f6"
+-                                   stroke="#ef4444"
++                                   strokeWidth={4}
+-                                   strokeWidth="5"
+                                    strokeLinecap="round"
+                                  >
+                                  <circle
+                                    cx="200"
+                                    cy="200"
++                                   r={4}
+-                                   r="6"
++                                   fill="#3b82f6"
+-                                   fill="#ef4444"
+                                  >
++                               <g className="transition-transform duration-500 ease-out">
+-                               <circle cx="200" cy="200" r="25" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="2">
+                                ...
+                              ...
+                  ...
+      ...
+
+[05:50:56.762] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[05:50:56.762] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
+[05:50:56.762] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
+[05:50:56.762] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765470600706}
+[05:50:56.762] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765470600706}
+[06:48:19.619] Server  LOG      ✓ Compiled in 161ms
+[07:10:29.911] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:10:30.111] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RedirectErrorBoundary router={{...}}>
+      <InnerLayoutRouter url="/game/YYTS7C" tree={[...]} params={{code:"YYTS7C"}} cacheNode={{lazyData:null, ...}} ...>
+        <SegmentViewNode type="page" pagePath="/Desktop/P...">
+          <SegmentTrieNode>
+          <GamePage>
+            <GameClient initialGameState={{...}}>
+              <GamePlay initialGameState={{...}}>
+                <div className="min-h-scre...">
+                  <div>
+                  <div className="relative m...">
+                    <div>
+                    <Card className="shadow-lg ...">
+                      <div data-slot="card" className="bg-card te...">
+                        <CardContent className="pt-8 pb-6">
+                          <div data-slot="card-content" className="px-6 pt-8 ...">
+                            <WavelengthWheel targetPosition={56} showTarget={false} showZones={false} guessPosition={90} ...>
+                              <div className="w-full mx-..." ref={{current:null}}>
+                                <svg
+                                  viewBox="0 0 400 230"
++                                 className="w-full h-auto touch-none select-none"
+-                                 className="w-full h-auto touch-none select-none cursor-pointer"
+                                  onMouseDown={function handleMouseDown}
+                                  onTouchStart={function handleTouchStart}
+                                >
+                                  <path>
+                                  <path>
+                                  <path>
+                                  <line>
+                                  <line>
+                                  <line>
+                                  <line>
+                                  <line>
+                                  <line>
+                                  <line
+                                    x1={114.99999999999996}
++                                   y1={52.775681356645464}
+-                                   y1="52.775681356645435"
+                                    x2={112.49999999999996}
+                                    y2={48.44555433772325}
+                                    stroke="#94a3b8"
+                                    strokeWidth="1"
+                                  >
+                                  ...
+                                  ...
+                                ...
+                    <Card className="shadow-lg ...">
+                      <div data-slot="card" className="bg-card te...">
+                        <CardHeader className="pb-4">
+                          <div data-slot="card-header" className="@container...">
+                            <CardTitle className="text-cente...">
+                              <div data-slot="card-title" className="font-semib...">
+                                <span
++                                 className="flex items-center justify-center gap-2 text-primary"
+-                                 className="text-foreground"
+                                >
+                                  <Eye className="h-5 w-5">
++                                   <svg
++                                     ref={null}
++                                     xmlns="http://www.w3.org/2000/svg"
++                                     width={24}
++                                     height={24}
++                                     viewBox="0 0 24 24"
++                                     fill="none"
++                                     stroke="currentColor"
++                                     strokeWidth={2}
++                                     strokeLinecap="round"
++                                     strokeLinejoin="round"
++                                     className="lucide lucide-eye h-5 w-5"
++                                   >
+-                                   kifkz
+                                  ...
+                        ...
+                    ...
+        ...
+      ...
+
+[07:10:30.111] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[07:10:30.112] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
+[07:10:30.112] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
+[07:10:30.112] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765475373894}
+[07:10:30.112] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765475373894}
+[07:12:51.929] Server  LOG      ✓ Compiled in 199ms
+[07:14:29.513] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:14:29.715] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RedirectErrorBoundary router={{...}}>
+      <InnerLayoutRouter url="/game/YYTS7C" tree={[...]} params={{code:"YYTS7C"}} cacheNode={{lazyData:null, ...}} ...>
+        <SegmentViewNode type="page" pagePath="/Desktop/P...">
+          <SegmentTrieNode>
+          <GamePage>
+            <GameClient initialGameState={{...}}>
+              <GamePlay initialGameState={{...}}>
+                <div className="min-h-scre...">
+                  <div>
+                  <div className="relative m...">
+                    <div>
+                    <Card className="shadow-lg ...">
+                      <div data-slot="card" className="bg-card te...">
+                        <CardContent className="pt-8 pb-6">
+                          <div data-slot="card-content" className="px-6 pt-8 ...">
+                            <WavelengthWheel targetPosition={56} showTarget={false} showZones={false} guessPosition={90} ...>
+                              <div className="w-full mx-..." ref={{current:null}}>
+                                <svg
+                                  viewBox="0 0 400 230"
++                                 className="w-full h-auto touch-none select-none"
+-                                 className="w-full h-auto touch-none select-none cursor-pointer"
+                                  onMouseDown={function handleMouseDown}
+                                  onTouchStart={function handleTouchStart}
+                                >
+                                  <path>
+                                  <path>
+                                  <path>
+                                  <line>
+                                  <line>
+                                  <line>
+                                  <line>
+                                  <line>
+                                  <line>
+                                  <line
+                                    x1={114.99999999999996}
++                                   y1={52.775681356645464}
+-                                   y1="52.775681356645435"
+                                    x2={112.49999999999996}
+                                    y2={48.44555433772325}
+                                    stroke="#94a3b8"
+                                    strokeWidth="1"
+                                  >
+                                  ...
+                                  ...
+                                ...
+                    <Card className="shadow-lg ...">
+                      <div data-slot="card" className="bg-card te...">
+                        <CardHeader className="pb-4">
+                          <div data-slot="card-header" className="@container...">
+                            <CardTitle className="text-cente...">
+                              <div data-slot="card-title" className="font-semib...">
+                                <span
++                                 className="flex items-center justify-center gap-2 text-primary"
+-                                 className="text-foreground"
+                                >
+                                  <Eye className="h-5 w-5">
++                                   <svg
++                                     ref={null}
++                                     xmlns="http://www.w3.org/2000/svg"
++                                     width={24}
++                                     height={24}
++                                     viewBox="0 0 24 24"
++                                     fill="none"
++                                     stroke="currentColor"
++                                     strokeWidth={2}
++                                     strokeLinecap="round"
++                                     strokeLinejoin="round"
++                                     className="lucide lucide-eye h-5 w-5"
++                                   >
+-                                   kifkz
+                                  ...
+                        ...
+                    ...
+        ...
+      ...
+
+[07:14:29.715] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[07:14:29.715] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
+[07:14:29.715] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
+[07:14:29.715] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765475613492}
+[07:14:29.715] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765475613492}
+[07:14:49.805] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:14:49.941] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RedirectErrorBoundary router={{...}}>
+      <InnerLayoutRouter url="/game/YYTS7C" tree={[...]} params={{code:"YYTS7C"}} cacheNode={{lazyData:null, ...}} ...>
+        <SegmentViewNode type="page" pagePath="/Desktop/P...">
+          <SegmentTrieNode>
+          <GamePage>
+            <GameClient initialGameState={{...}}>
+              <GamePlay initialGameState={{...}}>
+                <div className="min-h-scre...">
+                  <div>
+                  <div className="relative m...">
+                    <div>
+                    <Card className="shadow-lg ...">
+                      <div data-slot="card" className="bg-card te...">
+                        <CardContent className="pt-8 pb-6">
+                          <div data-slot="card-content" className="px-6 pt-8 ...">
+                            <WavelengthWheel targetPosition={56} showTarget={false} showZones={false} guessPosition={90} ...>
+                              <div className="w-full mx-..." ref={{current:null}}>
+                                <svg
+                                  viewBox="0 0 400 230"
++                                 className="w-full h-auto touch-none select-none"
+-                                 className="w-full h-auto touch-none select-none cursor-pointer"
+                                  onMouseDown={function handleMouseDown}
+                                  onTouchStart={function handleTouchStart}
+                                >
+                                  <path>
+                                  <path>
+                                  <path>
+                                  <line>
+                                  <line>
+                                  <line>
+                                  <line>
+                                  <line>
+                                  <line>
+                                  <line
+                                    x1={114.99999999999996}
++                                   y1={52.775681356645464}
+-                                   y1="52.775681356645435"
+                                    x2={112.49999999999996}
+                                    y2={48.44555433772325}
+                                    stroke="#94a3b8"
+                                    strokeWidth="1"
+                                  >
+                                  ...
+                                  ...
+                                ...
+                    <Card className="shadow-lg ...">
+                      <div data-slot="card" className="bg-card te...">
+                        <CardHeader className="pb-4">
+                          <div data-slot="card-header" className="@container...">
+                            <CardTitle className="text-cente...">
+                              <div data-slot="card-title" className="font-semib...">
+                                <span
++                                 className="flex items-center justify-center gap-2 text-primary"
+-                                 className="text-foreground"
+                                >
+                                  <Eye className="h-5 w-5">
++                                   <svg
++                                     ref={null}
++                                     xmlns="http://www.w3.org/2000/svg"
++                                     width={24}
++                                     height={24}
++                                     viewBox="0 0 24 24"
++                                     fill="none"
++                                     stroke="currentColor"
++                                     strokeWidth={2}
++                                     strokeLinecap="round"
++                                     strokeLinejoin="round"
++                                     className="lucide lucide-eye h-5 w-5"
++                                   >
+-                                   kifkz
+                                  ...
+                        ...
+                    ...
+        ...
+      ...
+
+[07:14:49.941] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[07:14:49.941] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
+[07:14:49.941] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
+[07:14:49.941] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765475633716}
+[07:14:49.941] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765475633716}
+[07:15:03.227] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[07:15:03.362] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RedirectErrorBoundary router={{...}}>
+      <InnerLayoutRouter url="/game/YYTS7C" tree={[...]} params={{code:"YYTS7C"}} cacheNode={{lazyData:null, ...}} ...>
+        <SegmentViewNode type="page" pagePath="/Desktop/P...">
+          <SegmentTrieNode>
+          <GamePage>
+            <GameClient initialGameState={{...}}>
+              <GamePlay initialGameState={{...}}>
+                <div className="min-h-scre...">
+                  <div>
+                  <div className="relative m...">
+                    <div>
+                    <Card className="shadow-lg ...">
+                      <div data-slot="card" className="bg-card te...">
+                        <CardContent className="pt-8 pb-6">
+                          <div data-slot="card-content" className="px-6 pt-8 ...">
+                            <WavelengthWheel targetPosition={56} showTarget={false} showZones={false} guessPosition={90} ...>
+                              <div className="w-full mx-..." ref={{current:null}}>
+                                <svg
+                                  viewBox="0 0 400 230"
++                                 className="w-full h-auto touch-none select-none"
+-                                 className="w-full h-auto touch-none select-none cursor-pointer"
+                                  onMouseDown={function handleMouseDown}
+                                  onTouchStart={function handleTouchStart}
+                                >
+                                  <path>
+                                  <path>
+                                  <path>
+                                  <line>
+                                  <line>
+                                  <line>
+                                  <line>
+                                  <line>
+                                  <line>
+                                  <line
+                                    x1={114.99999999999996}
++                                   y1={52.775681356645464}
+-                                   y1="52.775681356645435"
+                                    x2={112.49999999999996}
+                                    y2={48.44555433772325}
+                                    stroke="#94a3b8"
+                                    strokeWidth="1"
+                                  >
+                                  ...
+                                  ...
+                                ...
+                    <Card className="shadow-lg ...">
+                      <div data-slot="card" className="bg-card te...">
+                        <CardHeader className="pb-4">
+                          <div data-slot="card-header" className="@container...">
+                            <CardTitle className="text-cente...">
+                              <div data-slot="card-title" className="font-semib...">
+                                <span
++                                 className="flex items-center justify-center gap-2 text-primary"
+-                                 className="text-foreground"
+                                >
+                                  <Eye className="h-5 w-5">
++                                   <svg
++                                     ref={null}
++                                     xmlns="http://www.w3.org/2000/svg"
++                                     width={24}
++                                     height={24}
++                                     viewBox="0 0 24 24"
++                                     fill="none"
++                                     stroke="currentColor"
++                                     strokeWidth={2}
++                                     strokeLinecap="round"
++                                     strokeLinejoin="round"
++                                     className="lucide lucide-eye h-5 w-5"
++                                   >
+-                                   kifkz
+                                  ...
+                        ...
+                    ...
+        ...
+      ...
+
+[07:15:03.362] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[07:15:03.362] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
+[07:15:03.362] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
+[07:15:03.362] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765475647137}
+[07:15:03.362] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765475647137}
+[07:16:04.215] Server  LOG      ✓ Compiled in 117ms
+[07:16:27.789] Server  LOG      ✓ Compiled in 58ms

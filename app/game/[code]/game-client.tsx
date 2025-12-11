@@ -69,20 +69,45 @@ export function GameClient({ initialGameState }: GameClientProps) {
   }, [gameState.game.id, supabase, sessionId, router])
 
   const handleStartGame = async () => {
-    // Sélectionner une carte aléatoire du thème
-    const { data: cards } = await supabase.from("cards").select("*").eq("theme_id", gameState.theme?.id)
+    console.log("Starting game...")
 
-    if (!cards || cards.length === 0) return
+    // Get the selected theme from the game state
+    const themeId = gameState.theme?.id || "tous"
+    console.log("Theme ID:", themeId)
+
+    // Fetch cards - if "tous", get all cards, otherwise filter by theme
+    let cards
+    if (themeId === "tous") {
+      // @ts-ignore
+      const { data } = await supabase.from("cards").select("*")
+      cards = data
+    } else {
+      // @ts-ignore
+      const { data } = await supabase.from("cards").select("*").eq("theme_id", themeId)
+      cards = data
+    }
+
+    console.log("Cards found:", cards?.length || 0)
+
+    if (!cards || cards.length === 0) {
+      console.error("No cards found for theme:", themeId)
+      alert("Erreur: Aucune carte trouvée. Veuillez patienter quelques secondes pendant la synchronisation puis réessayer.")
+      return
+    }
 
     const randomCard = cards[Math.floor(Math.random() * cards.length)]
     const targetPosition = generateTargetPosition()
 
-    // Sélectionner un médium au hasard
-    const players = gameState.players
-    const randomPsychic = players[Math.floor(Math.random() * players.length)]
+    // Récupérer la liste à jour des joueurs
+    const { data: currentPlayers } = await supabase.from("game_players").select("*").eq("game_id", gameState.game.id)
+
+    if (!currentPlayers || currentPlayers.length < 2) return
+
+    const randomPsychic = currentPlayers[Math.floor(Math.random() * currentPlayers.length)]
 
     // Mettre à jour les joueurs
-    for (const player of players) {
+    for (const player of currentPlayers) {
+      // @ts-ignore
       await supabase
         .from("game_players")
         .update({
@@ -93,6 +118,7 @@ export function GameClient({ initialGameState }: GameClientProps) {
     }
 
     // Démarrer la partie
+    // @ts-ignore
     await supabase
       .from("games")
       .update({

@@ -21,15 +21,20 @@ export function GamePlay({ initialGameState }: GamePlayProps) {
   const [clue, setClue] = useState("")
   const [guessPosition, setGuessPosition] = useState(90)
   const [hasGuessed, setHasGuessed] = useState(false)
+  const [sessionId, setSessionId] = useState<string>("")
   const [phase, setPhase] = useState<"psychic" | "guessing" | "reveal">(
     initialGameState.game.current_clue ? "guessing" : "psychic",
   )
 
   const supabase = createClient()
-  const sessionId = getSessionId()
-  const currentPlayer = gameState.players.find((p) => p.session_id === sessionId)
+  const currentPlayer = sessionId ? gameState.players.find((p) => p.session_id === sessionId) : undefined
   const isPsychic = currentPlayer?.is_psychic
   const psychicPlayer = gameState.players.find((p) => p.is_psychic)
+
+  useEffect(() => {
+    // Set session ID on client only to avoid hydration mismatch
+    setSessionId(getSessionId())
+  }, [])
 
   useEffect(() => {
     const gameChannel = supabase
@@ -79,8 +84,46 @@ export function GamePlay({ initialGameState }: GamePlayProps) {
       )
       .subscribe()
 
+    // Fallback: Poll for updates every 2 seconds
+    const pollInterval = setInterval(async () => {
+      const { data: game } = await supabase.from("games").select("*").eq("id", gameState.game.id).single()
+      const { data: players } = await supabase.from("game_players").select("*").eq("game_id", gameState.game.id)
+
+      if (game && players) {
+        // Check if clue was submitted
+        if (game.current_clue && phase === "psychic") {
+          setPhase("guessing")
+        }
+
+        // Check if all guessed
+        const nonPsychics = players.filter(p => !p.is_psychic)
+        const allGuessed = nonPsychics.every(p => p.guess_position !== null)
+        if (allGuessed && phase === "guessing" && nonPsychics.length > 0) {
+          setPhase("reveal")
+        }
+
+        // Check if new round started
+        if (game.current_round !== gameState.game.current_round) {
+          setPhase("psychic")
+          setClue("")
+          setHasGuessed(false)
+          setGuessPosition(90)
+        }
+
+        // Update card if changed
+        let currentCard = gameState.currentCard
+        if (game.current_card_id && game.current_card_id !== gameState.currentCard?.id) {
+          const { data } = await supabase.from("cards").select("*").eq("id", game.current_card_id).single()
+          if (data) currentCard = data
+        }
+
+        setGameState(prev => ({ ...prev, game, players, currentCard }))
+      }
+    }, 2000)
+
     return () => {
       supabase.removeChannel(gameChannel)
+      clearInterval(pollInterval)
     }
   }, [gameState.game.id, supabase, phase])
 
@@ -201,9 +244,9 @@ export function GamePlay({ initialGameState }: GamePlayProps) {
           <CardContent className="pt-8 pb-6">
             <WavelengthWheel
               targetPosition={gameState.game.target_position ?? 90}
-              showTarget={phase === "reveal" || isPsychic}
-              showZones={phase === "reveal"}
-              guessPosition={guessPosition}
+              showTarget={phase === "reveal" || (isPsychic && phase === "psychic")}
+              showZones={phase === "reveal" || (isPsychic && phase === "psychic")}
+              guessPosition={phase === "guessing" || phase === "reveal" ? guessPosition : undefined}
               onGuessChange={setGuessPosition}
               interactive={!isPsychic && phase === "guessing" && !hasGuessed}
               leftExtreme={gameState.currentCard?.left_extreme || "Extrême gauche"}
@@ -289,9 +332,9 @@ export function GamePlay({ initialGameState }: GamePlayProps) {
             {/* Phase Révélation */}
             {phase === "reveal" && (
               <div className="space-y-4">
-                <div className="p-4 bg-accent/10 rounded-xl border border-accent/20 text-center">
-                  <p className="text-lg font-semibold text-foreground">
-                    La cible était à {Math.round(gameState.game.target_position ?? 0)}°
+                <div className="p-4 bg-indigo-50 rounded-xl border border-indigo-100 text-center">
+                  <p className="text-lg font-semibold text-indigo-700">
+                    Résultats de la manche
                   </p>
                 </div>
                 <div className="space-y-2">
@@ -334,21 +377,20 @@ export function GamePlay({ initialGameState }: GamePlayProps) {
                       )
                     })}
                 </div>
-                {currentPlayer?.is_host && (
-                  <Button className="w-full h-12 text-base font-semibold" onClick={handleNextRound}>
-                    {isLastRound ? (
-                      <>
-                        <Trophy className="h-5 w-5 mr-2" />
-                        Voir les résultats
-                      </>
-                    ) : (
-                      <>
-                        <ArrowRight className="h-5 w-5 mr-2" />
-                        Manche suivante
-                      </>
-                    )}
-                  </Button>
-                )}
+                {/* Allow host OR any player to advance (in case host left) */}
+                <Button className="w-full h-12 text-base font-semibold bg-indigo-500 hover:bg-indigo-600 rounded-xl" onClick={handleNextRound}>
+                  {isLastRound ? (
+                    <>
+                      <Trophy className="h-5 w-5 mr-2" />
+                      Voir les résultats
+                    </>
+                  ) : (
+                    <>
+                      <ArrowRight className="h-5 w-5 mr-2" />
+                      Manche suivante
+                    </>
+                  )}
+                </Button>
               </div>
             )}
           </CardContent>

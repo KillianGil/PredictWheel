@@ -187,6 +187,7 @@ export default function HomePage() {
           <p className="text-slate-500 mt-1">Créez ou rejoignez une partie</p>
         </div>
 
+        {/* Etape 1 : Pseudo */}
         <div className="bg-white/70 backdrop-blur-sm border border-slate-200 rounded-2xl p-5 space-y-4 shadow-sm">
           <div className="space-y-2">
             <label className="text-sm font-medium text-slate-600">Votre pseudo</label>
@@ -198,22 +199,23 @@ export default function HomePage() {
               className="h-12 rounded-xl bg-white border-slate-200"
             />
           </div>
-
-          {error && (
-            <div className="p-3 bg-red-50 border border-red-200 rounded-xl">
-              <p className="text-sm text-red-600 text-center">{error}</p>
-            </div>
-          )}
-
-          <Button
-            className="w-full h-14 text-lg font-semibold rounded-2xl bg-indigo-500 hover:bg-indigo-600"
-            onClick={handleCreateGame}
-            disabled={isLoading}
-          >
-            <Sparkles className="h-5 w-5 mr-2" />
-            Créer une partie
-          </Button>
         </div>
+
+        {error && (
+          <div className="p-3 bg-red-50 border border-red-200 rounded-xl">
+            <p className="text-sm text-red-600 text-center">{error}</p>
+          </div>
+        )}
+
+        {/* Créer une partie */}
+        <Button
+          className="w-full h-14 text-lg font-semibold rounded-2xl bg-indigo-500 hover:bg-indigo-600"
+          onClick={handleCreateGame}
+          disabled={isLoading || !playerName.trim()}
+        >
+          <Sparkles className="h-5 w-5 mr-2" />
+          Créer une partie
+        </Button>
 
         <div className="relative py-2">
           <div className="absolute inset-0 flex items-center">
@@ -224,18 +226,19 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="bg-white/70 backdrop-blur-sm border border-slate-200 rounded-2xl p-5 space-y-4 shadow-sm">
+        {/* Rejoindre une partie */}
+        <div className="flex gap-2">
           <Input
             placeholder="CODE"
             value={gameCode}
             onChange={(e) => setGameCode(e.target.value.toUpperCase())}
             maxLength={6}
-            className="h-14 text-center text-2xl font-mono tracking-[0.3em] uppercase rounded-xl bg-white border-slate-200"
+            className="h-14 text-center text-xl font-mono tracking-[0.2em] uppercase rounded-xl bg-white border-slate-200 flex-1"
           />
           <Button
-            className="w-full h-14 text-lg font-semibold rounded-2xl bg-violet-500 hover:bg-violet-600"
+            className="h-14 px-6 text-lg font-semibold rounded-2xl bg-violet-500 hover:bg-violet-600"
             onClick={handleJoinGame}
-            disabled={isLoading}
+            disabled={isLoading || !playerName.trim() || !gameCode.trim()}
           >
             <Users className="h-5 w-5 mr-2" />
             Rejoindre

@@ -122,91 +122,91 @@ export default function HomePage() {
 
   if (mode === "select") {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-background to-muted/30 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 flex items-center justify-center p-4">
         <div className="w-full max-w-md space-y-8">
           <div className="text-center space-y-4">
-            <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto shadow-lg">
-              <Waves className="h-10 w-10 text-primary-foreground" />
+            <div className="w-20 h-20 bg-indigo-500 rounded-full flex items-center justify-center mx-auto shadow-lg">
+              <Waves className="h-10 w-10 text-white" />
             </div>
             <div>
-              <h1 className="text-4xl font-bold tracking-tight">Wavelength</h1>
-              <p className="text-muted-foreground mt-2">Êtes-vous sur la même longueur d'onde ?</p>
+              <h1 className="text-4xl font-bold text-slate-800 tracking-tight">Predict Wheel</h1>
+              <p className="text-slate-500 mt-2">Êtes-vous sur la même longueur d'onde ?</p>
             </div>
           </div>
 
           <div className="space-y-3">
             <button
               onClick={() => setMode("local")}
-              className="w-full p-5 bg-card rounded-2xl flex items-center gap-4 hover:bg-muted/50 transition-colors text-left"
+              className="w-full p-5 bg-white/70 backdrop-blur-sm border border-slate-200 rounded-2xl flex items-center gap-4 hover:bg-white/90 hover:border-indigo-200 transition-all text-left shadow-sm"
             >
-              <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">
-                <Smartphone className="h-7 w-7 text-primary" />
+              <div className="w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center shrink-0">
+                <Smartphone className="h-7 w-7 text-indigo-600" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold">Mode Local</h3>
-                <p className="text-sm text-muted-foreground">Passez-vous le téléphone</p>
+                <h3 className="text-lg font-semibold text-slate-800">Mode Local</h3>
+                <p className="text-sm text-slate-500">Jouer ensemble sur le même téléphone/ordinateur</p>
               </div>
             </button>
 
             <button
               onClick={() => setMode("online")}
-              className="w-full p-5 bg-card rounded-2xl flex items-center gap-4 hover:bg-muted/50 transition-colors text-left"
+              className="w-full p-5 bg-white/70 backdrop-blur-sm border border-slate-200 rounded-2xl flex items-center gap-4 hover:bg-white/90 hover:border-violet-200 transition-all text-left shadow-sm"
             >
-              <div className="w-14 h-14 bg-blue-500/10 rounded-xl flex items-center justify-center shrink-0">
-                <Wifi className="h-7 w-7 text-blue-500" />
+              <div className="w-14 h-14 bg-violet-100 rounded-xl flex items-center justify-center shrink-0">
+                <Wifi className="h-7 w-7 text-violet-600" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold">Mode En Ligne</h3>
-                <p className="text-sm text-muted-foreground">Jouez avec un code de partie</p>
+                <h3 className="text-lg font-semibold text-slate-800">Mode En Ligne</h3>
+                <p className="text-sm text-slate-500">Jouez avec un code de partie</p>
               </div>
             </button>
           </div>
 
-          <p className="text-center text-sm text-muted-foreground">Un jeu de communication entre amis</p>
+          <p className="text-center text-sm text-slate-500">Un jeu de communication entre amis</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted/30 p-4 pb-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4 pb-8">
       <div className="max-w-md mx-auto space-y-6">
         <button
           onClick={() => setMode("select")}
-          className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+          className="flex items-center gap-2 text-slate-500 hover:text-slate-700 transition-colors"
         >
           <ArrowLeft className="h-5 w-5" />
           <span>Retour</span>
         </button>
 
         <div className="text-center py-4">
-          <div className="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Wifi className="h-8 w-8 text-blue-500" />
+          <div className="w-16 h-16 bg-violet-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Wifi className="h-8 w-8 text-violet-600" />
           </div>
-          <h1 className="text-3xl font-bold">Mode En Ligne</h1>
-          <p className="text-muted-foreground mt-1">Créez ou rejoignez une partie</p>
+          <h1 className="text-3xl font-bold text-slate-800">Mode En Ligne</h1>
+          <p className="text-slate-500 mt-1">Créez ou rejoignez une partie</p>
         </div>
 
-        <div className="bg-card rounded-2xl p-5 space-y-4">
+        <div className="bg-white/70 backdrop-blur-sm border border-slate-200 rounded-2xl p-5 space-y-4 shadow-sm">
           <div className="space-y-2">
-            <label className="text-sm font-medium">Votre pseudo</label>
+            <label className="text-sm font-medium text-slate-600">Votre pseudo</label>
             <Input
               placeholder="Entrez votre nom..."
               value={playerName}
               onChange={(e) => setPlayerName(e.target.value)}
               maxLength={20}
-              className="h-12 rounded-xl"
+              className="h-12 rounded-xl bg-white border-slate-200"
             />
           </div>
 
           {error && (
-            <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-xl">
-              <p className="text-sm text-destructive text-center">{error}</p>
+            <div className="p-3 bg-red-50 border border-red-200 rounded-xl">
+              <p className="text-sm text-red-600 text-center">{error}</p>
             </div>
           )}
 
           <Button
-            className="w-full h-14 text-lg font-semibold rounded-2xl"
+            className="w-full h-14 text-lg font-semibold rounded-2xl bg-indigo-500 hover:bg-indigo-600"
             onClick={handleCreateGame}
             disabled={isLoading}
           >
@@ -217,24 +217,23 @@ export default function HomePage() {
 
         <div className="relative py-2">
           <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t" />
+            <span className="w-full border-t border-slate-200" />
           </div>
           <div className="relative flex justify-center">
-            <span className="bg-background px-4 text-sm text-muted-foreground">ou rejoindre</span>
+            <span className="bg-gradient-to-r from-slate-50 via-white to-indigo-50 px-4 text-sm text-slate-500">ou rejoindre</span>
           </div>
         </div>
 
-        <div className="bg-card rounded-2xl p-5 space-y-4">
+        <div className="bg-white/70 backdrop-blur-sm border border-slate-200 rounded-2xl p-5 space-y-4 shadow-sm">
           <Input
             placeholder="CODE"
             value={gameCode}
             onChange={(e) => setGameCode(e.target.value.toUpperCase())}
             maxLength={6}
-            className="h-14 text-center text-2xl font-mono tracking-[0.3em] uppercase rounded-xl"
+            className="h-14 text-center text-2xl font-mono tracking-[0.3em] uppercase rounded-xl bg-white border-slate-200"
           />
           <Button
-            className="w-full h-14 text-lg font-semibold rounded-2xl"
-            variant="secondary"
+            className="w-full h-14 text-lg font-semibold rounded-2xl bg-violet-500 hover:bg-violet-600"
             onClick={handleJoinGame}
             disabled={isLoading}
           >

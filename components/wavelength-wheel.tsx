@@ -47,7 +47,9 @@ export function WavelengthWheel({
       const dy = centerY - clientY
 
       let angle = Math.atan2(dy, dx) * (180 / Math.PI)
-      angle = Math.max(10, Math.min(170, angle))
+      // Correction logic for needle direction
+      angle = 180 - angle
+      angle = Math.max(0, Math.min(180, angle))
 
       setCurrentGuess(angle)
       onGuessChange?.(angle)
@@ -130,16 +132,18 @@ export function WavelengthWheel({
     if (!showZones) return null
 
     const zones = [
-      { offset: -22, width: 10, points: 2, color: "#60a5fa" },
-      { offset: -12, width: 10, points: 3, color: "#fb923c" },
-      { offset: -4, width: 8, points: 4, color: "#f87171" },
-      { offset: 4, width: 10, points: 3, color: "#fb923c" },
-      { offset: 14, width: 10, points: 2, color: "#60a5fa" },
+      { offset: -22, width: 10, points: 2, color: "#3b82f6" },  // Blue (2 pts)
+      { offset: -12, width: 8, points: 3, color: "#f97316" },   // Orange (3 pts)
+      { offset: -4, width: 8, points: 4, color: "#ef4444" },    // Red (Center - 4 pts)
+      { offset: 4, width: 8, points: 3, color: "#f97316" },     // Orange (3 pts)
+      { offset: 12, width: 10, points: 2, color: "#3b82f6" },   // Blue (2 pts)
     ]
 
     return zones.map((zone, index) => {
       const startAngle = Math.max(0, targetPosition + zone.offset)
       const endAngle = Math.min(180, startAngle + zone.width)
+      if (endAngle <= startAngle) return null
+
       const midAngle = ((startAngle + endAngle) / 2) * (Math.PI / 180)
       const textRadius = 130
       const textX = 200 + textRadius * Math.cos(Math.PI - midAngle)
@@ -147,17 +151,20 @@ export function WavelengthWheel({
 
       return (
         <g key={index}>
-          <path d={createArc(startAngle, endAngle, 45, 175)} fill={zone.color} />
+          <path
+            d={createArc(startAngle, endAngle, 45, 175)}
+            fill={zone.color}
+            opacity={0.9}
+          />
           <text
             x={textX}
             y={textY}
             textAnchor="middle"
             dominantBaseline="middle"
             fill="white"
-            fontWeight="700"
-            fontSize="18"
+            fontWeight="600"
+            fontSize="16"
             className="select-none pointer-events-none"
-            style={{ textShadow: "0 1px 2px rgba(0,0,0,0.3)" }}
           >
             {zone.points}
           </text>
@@ -168,52 +175,70 @@ export function WavelengthWheel({
 
   const renderNeedle = (angle: number, isTarget = false) => {
     const rad = (angle * Math.PI) / 180
-    const length = 160
+    const length = 155
     const endX = 200 + length * Math.cos(Math.PI - rad)
     const endY = 200 - length * Math.sin(Math.PI - rad)
 
+    // FORCE RED for player needle. Target needle is blue (but hidden mostly).
+    const needleColor = isTarget ? "#3b82f6" : "#ef4444"
+
     return (
-      <g className={cn(!isDragging && "transition-transform duration-150")}>
+      <g className={cn(!isDragging && "transition-transform duration-500 ease-out")}>
+        {/* Shadow */}
+        <line
+          x1="200"
+          y1="205"
+          x2={endX}
+          y2={endY + 5}
+          stroke="rgba(0,0,0,0.1)"
+          strokeWidth={isTarget ? 4 : 5}
+          strokeLinecap="round"
+        />
+        {/* Main needle */}
         <line
           x1="200"
           y1="200"
           x2={endX}
           y2={endY}
-          stroke={isTarget ? "#dc2626" : "#8b5cf6"}
-          strokeWidth={isTarget ? 8 : 6}
+          stroke={needleColor}
+          strokeWidth={isTarget ? 4 : 5}
           strokeLinecap="round"
-          style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))" }}
         />
+        {/* Center pivot */}
         <circle
-          cx={endX}
-          cy={endY}
-          r={isTarget ? 10 : 8}
-          fill={isTarget ? "#dc2626" : "#8b5cf6"}
-          style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.2))" }}
+          cx="200"
+          cy="200"
+          r={isTarget ? 4 : 6}
+          fill={needleColor}
         />
       </g>
     )
   }
 
   return (
-    <div className="w-full max-w-sm mx-auto" ref={containerRef}>
+    <div className="w-full mx-auto" ref={containerRef}>
       <svg
         viewBox="0 0 400 230"
         className={cn("w-full h-auto touch-none select-none", interactive && "cursor-pointer")}
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
       >
-        {/* Fond de la roue - blanc cassé */}
-        <path d={createArc(0, 180, 0, 180)} fill="#f8f6f1" />
+        {/* Background of the wheel */}
+        <path d={createArc(0, 180, 0, 180)} fill="#f1f5f9" />
 
-        {/* Bordure extérieure épaisse - bleu marine */}
+        {/* Outer border */}
         <path
-          d={createArc(0, 180, 175, 190)}
-          fill="#1e3a5f"
-          style={{ filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.3))" }}
+          d={createArc(0, 180, 175, 185)}
+          fill="#e2e8f0"
         />
 
-        {/* Zones de score */}
+        {/* Inner ring */}
+        <path
+          d={createArc(0, 180, 40, 45)}
+          fill="#e2e8f0"
+        />
+
+        {/* Scoring zones/Target */}
         {renderScoringZones()}
 
         {/* Graduations */}
@@ -226,30 +251,55 @@ export function WavelengthWheel({
           const y1 = 200 - inner * Math.sin(Math.PI - rad)
           const x2 = 200 + outer * Math.cos(Math.PI - rad)
           const y2 = 200 - outer * Math.sin(Math.PI - rad)
-          return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#cbd5e1" strokeWidth="1" />
+          return (
+            <line
+              key={i}
+              x1={x1}
+              y1={y1}
+              x2={x2}
+              y2={y2}
+              stroke="#94a3b8"
+              strokeWidth="1"
+            />
+          )
         })}
 
-        {/* Aiguille cible */}
-        {showTarget && renderNeedle(targetPosition, true)}
+        {/* Target needle (Blue) - ONLY show if zones are NOT shown. 
+            If zones are shown (reveal/guessing), the zones ARE the target markers.
+            Double needle is confusing.
+        */}
+        {showTarget && !showZones && renderNeedle(targetPosition, true)}
 
-        {/* Aiguille joueur */}
-        {interactive && renderNeedle(currentGuess, false)}
+        {/* Player needle (Red) - Always visible if interactive or if playing/revealing */}
+        {(interactive || guessPosition !== undefined) && renderNeedle(currentGuess, false)}
 
-        {/* Bouton central */}
-        <circle cx="200" cy="200" r="40" fill="#dc2626" style={{ filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.3))" }} />
-        <circle cx="200" cy="200" r="32" fill="#ef4444" />
-        <ellipse cx="192" cy="190" rx="14" ry="10" fill="rgba(255,255,255,0.25)" />
+        {/* Central button */}
+        <circle
+          cx="200"
+          cy="200"
+          r="25"
+          fill="#e2e8f0"
+          stroke="#cbd5e1"
+          strokeWidth="2"
+        />
+        <circle
+          cx="200"
+          cy="200"
+          r="12"
+          fill="#ef4444"
+          className="shadow-sm"
+        />
       </svg>
 
-      {/* Labels des extrêmes */}
-      <div className="flex justify-between items-start mt-3 px-1">
-        <div className="max-w-[45%]">
-          <span className="inline-block px-3 py-2 bg-slate-900 text-white rounded-lg text-sm font-medium leading-tight">
+      {/* Labels - Cleaner layout: smaller text, more margin top, no overlapping */}
+      <div className="flex justify-between items-start mt-2 px-2 gap-4">
+        <div className="flex-1 text-left">
+          <span className="inline-block px-3 py-2 bg-white/90 backdrop-blur-sm border border-slate-200 text-slate-700 rounded-xl text-xs sm:text-sm font-medium shadow-sm leading-tight break-words max-w-full">
             {leftExtreme}
           </span>
         </div>
-        <div className="max-w-[45%] text-right">
-          <span className="inline-block px-3 py-2 bg-slate-900 text-white rounded-lg text-sm font-medium leading-tight">
+        <div className="flex-1 text-right">
+          <span className="inline-block px-3 py-2 bg-white/90 backdrop-blur-sm border border-slate-200 text-slate-700 rounded-xl text-xs sm:text-sm font-medium shadow-sm leading-tight break-words max-w-full">
             {rightExtreme}
           </span>
         </div>

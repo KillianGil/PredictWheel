@@ -29,12 +29,12 @@ export function getSessionId(): string {
 export function calculatePoints(guessPosition: number, targetPosition: number): number {
   const distance = Math.abs(guessPosition - targetPosition)
 
-  // Zone centrale (4 points) - environ 10 degrés
-  if (distance <= 5) return 4
-  // Zone suivante (3 points) - environ 20 degrés
-  if (distance <= 15) return 3
-  // Zone externe (2 points) - environ 30 degrés
-  if (distance <= 25) return 2
+  // Zone centrale (4 points) - +/- 4 degrés
+  if (distance <= 4) return 4
+  // Zone suivante (3 points) - +/- 12 degrés
+  if (distance <= 12) return 3
+  // Zone externe (2 points) - +/- 22 degrés
+  if (distance <= 22) return 2
   // Hors zone
   return 0
 }

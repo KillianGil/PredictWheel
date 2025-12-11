@@ -9,6 +9,8 @@ import { generateTargetPosition, calculatePoints } from "@/lib/game-utils"
 import type { LocalPlayer, LocalGameState } from "@/lib/types"
 import { Users, Plus, Trash2, Play, Eye, EyeOff, Send, ArrowRight, Trophy, RotateCcw, Home, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+// @ts-ignore
+import confetti from "canvas-confetti"
 
 interface LocalGameProps {
   onBack: () => void
@@ -26,6 +28,7 @@ export function LocalGame({ onBack }: LocalGameProps) {
     currentPsychicIndex: 0,
     phase: "setup",
     guesses: [],
+    usedCards: [],
   })
   const [newPlayerName, setNewPlayerName] = useState("")
   const [clue, setClue] = useState("")
@@ -53,10 +56,11 @@ export function LocalGame({ onBack }: LocalGameProps) {
   }
 
   const startGame = () => {
-    const card = getRandomCard(gameState.theme)
+    const card = getRandomCard(gameState.theme, gameState.usedCards || [])
     const target = generateTargetPosition()
     setGameState((prev) => ({
       ...prev,
+      usedCards: [...(prev.usedCards || []), { leftExtreme: card.leftExtreme, rightExtreme: card.rightExtreme }],
       currentCard: { leftExtreme: card.leftExtreme, rightExtreme: card.rightExtreme },
       targetPosition: target,
       phase: "psychic-view",
@@ -96,6 +100,22 @@ export function LocalGame({ onBack }: LocalGameProps) {
       })
       setGameState((prev) => ({ ...prev, guesses: newGuesses, players: updatedPlayers, phase: "reveal" }))
       setCurrentGuesserIndex(0) // Reset to show the best result (index 0) initially in reveal phase
+
+      // Confetti if anyone scored points (maybe > 0 or specific logic)
+      const hasScore = updatedPlayers.some(p => {
+        const guess = newGuesses.find(g => g.playerId === p.id)
+        if (!guess || gameState.targetPosition === null) return false
+        return calculatePoints(guess.position, gameState.targetPosition) > 0
+      })
+
+      if (hasScore) {
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#6366f1', '#8b5cf6', '#ec4899']
+        })
+      }
     } else {
       setGameState((prev) => ({ ...prev, guesses: newGuesses }))
       setCurrentGuesserIndex((prev) => prev + 1)
@@ -108,11 +128,12 @@ export function LocalGame({ onBack }: LocalGameProps) {
       setGameState((prev) => ({ ...prev, phase: "finished" }))
       return
     }
-    const card = getRandomCard(gameState.theme)
+    const card = getRandomCard(gameState.theme, gameState.usedCards || [])
     const target = generateTargetPosition()
     const nextPsychicIndex = (gameState.currentPsychicIndex + 1) % gameState.players.length
     setGameState((prev) => ({
       ...prev,
+      usedCards: [...(prev.usedCards || []), { leftExtreme: card.leftExtreme, rightExtreme: card.rightExtreme }],
       currentCard: { leftExtreme: card.leftExtreme, rightExtreme: card.rightExtreme },
       targetPosition: target,
       currentClue: null,
@@ -136,6 +157,7 @@ export function LocalGame({ onBack }: LocalGameProps) {
       targetPosition: null,
       currentClue: null,
       guesses: [],
+      usedCards: [],
     }))
   }
 
@@ -311,7 +333,7 @@ export function LocalGame({ onBack }: LocalGameProps) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4">
         {showQuitConfirm && <QuitConfirmModal />}
-        <div className="max-w-md md:max-w-2xl mx-auto">
+        <div className="max-w-md md:max-w-xl mx-auto">
           <GameHeader />
 
           <div className="text-center space-y-6">
@@ -359,7 +381,7 @@ export function LocalGame({ onBack }: LocalGameProps) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4">
         {showQuitConfirm && <QuitConfirmModal />}
-        <div className="max-w-md md:max-w-2xl mx-auto">
+        <div className="max-w-md md:max-w-xl mx-auto">
           <GameHeader />
 
           <WavelengthWheel
@@ -407,7 +429,7 @@ export function LocalGame({ onBack }: LocalGameProps) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4">
         {showQuitConfirm && <QuitConfirmModal />}
-        <div className="max-w-md md:max-w-2xl mx-auto">
+        <div className="max-w-md md:max-w-xl mx-auto">
           <GameHeader />
 
           <div className="text-center mb-4">
@@ -490,7 +512,7 @@ export function LocalGame({ onBack }: LocalGameProps) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4 pb-8">
         {showQuitConfirm && <QuitConfirmModal />}
-        <div className="max-w-md md:max-w-2xl mx-auto space-y-6">
+        <div className="max-w-md md:max-w-xl mx-auto space-y-6">
           <GameHeader />
 
           <div className="text-center mb-2">

@@ -156,8 +156,18 @@ export const LOCAL_THEMES = [
   { id: "tous", name: "Tous", description: "Toutes les catégories" },
 ]
 
-export function getRandomCard(theme: string): LocalCard {
+export function getRandomCard(theme: string, usedCards: { leftExtreme: string; rightExtreme: string }[] = []): LocalCard {
   const cards = theme === "tous" ? LOCAL_CARDS : LOCAL_CARDS.filter((card) => card.theme === theme)
 
-  return cards[Math.floor(Math.random() * cards.length)]
+  const availableCards = cards.filter(
+    (card) =>
+      !usedCards.some(
+        (used) => used.leftExtreme === card.leftExtreme && used.rightExtreme === card.rightExtreme
+      )
+  )
+
+  // If all cards used, fallback to all cards (or maybe clear history? but for now just fallback)
+  const pool = availableCards.length > 0 ? availableCards : cards
+
+  return pool[Math.floor(Math.random() * pool.length)]
 }

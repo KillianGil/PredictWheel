@@ -1604,7 +1604,7 @@ function LocalGame({ onBack }) {
     // Phase Setup
     if (gameState.phase === "setup") {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4 pb-8",
+            className: "min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-violet-100 p-4 pb-8",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "max-w-md mx-auto space-y-6",
                 children: [
@@ -1932,7 +1932,7 @@ function LocalGame({ onBack }) {
     // Phase: Médium voit la cible
     if (gameState.phase === "psychic-view") {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4",
+            className: "min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-violet-100 p-4",
             children: [
                 showQuitConfirm && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(QuitConfirmModal, {}, void 0, false, {
                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
@@ -2074,7 +2074,7 @@ function LocalGame({ onBack }) {
     // Phase: Médium donne son indice
     if (gameState.phase === "psychic-clue") {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4",
+            className: "min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-violet-100 p-4",
             children: [
                 showQuitConfirm && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(QuitConfirmModal, {}, void 0, false, {
                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
@@ -2183,7 +2183,7 @@ function LocalGame({ onBack }) {
     if (gameState.phase === "guessing") {
         const currentGuesser = guessers[currentGuesserIndex];
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4",
+            className: "min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-violet-100 p-4",
             children: [
                 showQuitConfirm && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(QuitConfirmModal, {}, void 0, false, {
                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
@@ -2340,7 +2340,7 @@ function LocalGame({ onBack }) {
         // Let's assume I will fix the state logic. Here is the UI update:
         const viewedResult = guessResults[currentGuesserIndex] || guessResults[0];
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4 pb-8",
+            className: "min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-violet-100 p-4 pb-8",
             children: [
                 showQuitConfirm && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(QuitConfirmModal, {}, void 0, false, {
                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
@@ -2608,7 +2608,7 @@ function LocalGame({ onBack }) {
         ].sort((a, b)=>b.score - a.score);
         const winner = sortedPlayers[0];
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4 flex items-center justify-center",
+            className: "min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-violet-100 p-4 flex items-center justify-center",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "max-w-md w-full space-y-6",
                 children: [
@@ -2914,7 +2914,7 @@ function HomePage() {
     }
     if (mode === "select") {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 flex items-center justify-center p-4",
+            className: "min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-violet-100 flex items-center justify-center p-4",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "w-full max-w-md space-y-8",
                 children: [
@@ -3069,14 +3069,6 @@ function HomePage() {
                         fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
                         lineNumber: 137,
                         columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "text-center text-sm text-slate-500",
-                        children: "Un jeu de communication entre amis"
-                    }, void 0, false, {
-                        fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                        lineNumber: 165,
-                        columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
@@ -3091,7 +3083,7 @@ function HomePage() {
         }, this);
     }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4 pb-8",
+        className: "min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-violet-100 p-4 pb-8",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "max-w-md mx-auto space-y-6",
             children: [
@@ -3103,20 +3095,20 @@ function HomePage() {
                             className: "h-5 w-5"
                         }, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                            lineNumber: 178,
+                            lineNumber: 177,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                             children: "Retour"
                         }, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                            lineNumber: 179,
+                            lineNumber: 178,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                    lineNumber: 174,
+                    lineNumber: 173,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3128,12 +3120,12 @@ function HomePage() {
                                 className: "h-8 w-8 text-violet-600"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                                lineNumber: 184,
+                                lineNumber: 183,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                            lineNumber: 183,
+                            lineNumber: 182,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -3141,7 +3133,7 @@ function HomePage() {
                             children: "Mode En Ligne"
                         }, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                            lineNumber: 186,
+                            lineNumber: 185,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3149,13 +3141,13 @@ function HomePage() {
                             children: "Créez ou rejoignez une partie"
                         }, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                            lineNumber: 187,
+                            lineNumber: 186,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                    lineNumber: 182,
+                    lineNumber: 181,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3168,7 +3160,7 @@ function HomePage() {
                                 children: "Votre pseudo"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                                lineNumber: 193,
+                                lineNumber: 192,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -3179,18 +3171,18 @@ function HomePage() {
                                 className: "h-12 rounded-xl bg-white border-slate-200"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                                lineNumber: 194,
+                                lineNumber: 193,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                        lineNumber: 192,
+                        lineNumber: 191,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                    lineNumber: 191,
+                    lineNumber: 190,
                     columnNumber: 9
                 }, this),
                 error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3200,12 +3192,12 @@ function HomePage() {
                         children: error
                     }, void 0, false, {
                         fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                        lineNumber: 206,
+                        lineNumber: 205,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                    lineNumber: 205,
+                    lineNumber: 204,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -3217,14 +3209,14 @@ function HomePage() {
                             className: "h-5 w-5 mr-2"
                         }, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                            lineNumber: 216,
+                            lineNumber: 215,
                             columnNumber: 11
                         }, this),
                         "Créer une partie"
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                    lineNumber: 211,
+                    lineNumber: 210,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3236,33 +3228,33 @@ function HomePage() {
                                 className: "w-full border-t border-slate-200"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                                lineNumber: 222,
+                                lineNumber: 221,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                            lineNumber: 221,
+                            lineNumber: 220,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "relative flex justify-center",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                className: "bg-gradient-to-r from-slate-50 via-white to-indigo-50 px-4 text-sm text-slate-500",
+                                className: "bg-gradient-to-r from-slate-100 via-indigo-50 to-violet-100 px-4 text-sm text-slate-500",
                                 children: "ou rejoindre"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                                lineNumber: 225,
+                                lineNumber: 224,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                            lineNumber: 224,
+                            lineNumber: 223,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                    lineNumber: 220,
+                    lineNumber: 219,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3276,7 +3268,7 @@ function HomePage() {
                             className: "h-14 text-center text-xl font-mono tracking-[0.2em] uppercase rounded-xl bg-white border-slate-200 flex-1"
                         }, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                            lineNumber: 231,
+                            lineNumber: 230,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -3288,31 +3280,31 @@ function HomePage() {
                                     className: "h-5 w-5 mr-2"
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                                    lineNumber: 243,
+                                    lineNumber: 242,
                                     columnNumber: 13
                                 }, this),
                                 "Rejoindre"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                            lineNumber: 238,
+                            lineNumber: 237,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-                    lineNumber: 230,
+                    lineNumber: 229,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-            lineNumber: 173,
+            lineNumber: 172,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/Desktop/PredictWheel/app/page.tsx",
-        lineNumber: 172,
+        lineNumber: 171,
         columnNumber: 5
     }, this);
 }

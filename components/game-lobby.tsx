@@ -129,7 +129,7 @@ export function GameLobby({ gameState, onStartGame }: GameLobbyProps) {
   const canStart = players.length >= 2 && selectedTheme
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-violet-100 flex items-center justify-center p-4">
       <Card className="relative w-full max-w-lg shadow-xl border-slate-200 bg-white/90 backdrop-blur-sm">
         <CardHeader className="text-center pb-6">
           <div className="flex justify-center mb-4">

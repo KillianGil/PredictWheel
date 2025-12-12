@@ -1460,3 +1460,17 @@ https://react.dev/link/hydration-mismatch
 [07:15:03.362] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765475647137}
 [07:16:04.215] Server  LOG      ✓ Compiled in 117ms
 [07:16:27.789] Server  LOG      ✓ Compiled in 58ms
+[21:23:43.904] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765526567215}
+[21:27:38.527] Server  LOG      ✓ Compiled in 309ms
+[21:27:54.233] Server  LOG      ✓ Compiled in 273ms
+[21:28:27.492] Server  LOG      ✓ Compiled in 139ms
+[21:28:29.350] Server  LOG      ✓ Compiled in 36ms
+[21:28:31.208] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[21:28:31.391] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[21:28:31.391] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[21:28:31.391] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765526854703}
+[21:28:33.882] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[21:28:34.004] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[21:28:34.004] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[21:28:34.004] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765526857316}
+[21:29:00.810] Server  LOG      ✓ Compiled in 93ms

@@ -122,7 +122,7 @@ export default function HomePage() {
 
   if (mode === "select") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-violet-100 flex items-center justify-center p-4">
         <div className="w-full max-w-md space-y-8">
           <div className="text-center space-y-4">
             <div className="w-20 h-20 bg-indigo-500 rounded-full flex items-center justify-center mx-auto shadow-lg">
@@ -162,14 +162,13 @@ export default function HomePage() {
             </button>
           </div>
 
-          <p className="text-center text-sm text-slate-500">Un jeu de communication entre amis</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4 pb-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-violet-100 p-4 pb-8">
       <div className="max-w-md mx-auto space-y-6">
         <button
           onClick={() => setMode("select")}
@@ -222,7 +221,7 @@ export default function HomePage() {
             <span className="w-full border-t border-slate-200" />
           </div>
           <div className="relative flex justify-center">
-            <span className="bg-gradient-to-r from-slate-50 via-white to-indigo-50 px-4 text-sm text-slate-500">ou rejoindre</span>
+            <span className="bg-gradient-to-r from-slate-100 via-indigo-50 to-violet-100 px-4 text-sm text-slate-500">ou rejoindre</span>
           </div>
         </div>
 

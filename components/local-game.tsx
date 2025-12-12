@@ -200,7 +200,7 @@ export function LocalGame({ onBack }: LocalGameProps) {
   // Phase Setup
   if (gameState.phase === "setup") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4 pb-8">
+      <div className="min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-violet-100 p-4 pb-8">
         <div className="max-w-md mx-auto space-y-6">
           <button
             onClick={onBack}
@@ -331,7 +331,7 @@ export function LocalGame({ onBack }: LocalGameProps) {
   // Phase: Médium voit la cible
   if (gameState.phase === "psychic-view") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4">
+      <div className="min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-violet-100 p-4">
         {showQuitConfirm && <QuitConfirmModal />}
         <div className="max-w-md md:max-w-xl mx-auto">
           <GameHeader />
@@ -379,7 +379,7 @@ export function LocalGame({ onBack }: LocalGameProps) {
   // Phase: Médium donne son indice
   if (gameState.phase === "psychic-clue") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4">
+      <div className="min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-violet-100 p-4">
         {showQuitConfirm && <QuitConfirmModal />}
         <div className="max-w-md md:max-w-xl mx-auto">
           <GameHeader />
@@ -427,7 +427,7 @@ export function LocalGame({ onBack }: LocalGameProps) {
     const currentGuesser = guessers[currentGuesserIndex]
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4">
+      <div className="min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-violet-100 p-4">
         {showQuitConfirm && <QuitConfirmModal />}
         <div className="max-w-md md:max-w-xl mx-auto">
           <GameHeader />
@@ -510,7 +510,7 @@ export function LocalGame({ onBack }: LocalGameProps) {
     const viewedResult = guessResults[currentGuesserIndex] || guessResults[0]
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4 pb-8">
+      <div className="min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-violet-100 p-4 pb-8">
         {showQuitConfirm && <QuitConfirmModal />}
         <div className="max-w-md md:max-w-xl mx-auto space-y-6">
           <GameHeader />
@@ -637,7 +637,7 @@ export function LocalGame({ onBack }: LocalGameProps) {
     const winner = sortedPlayers[0]
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 p-4 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-violet-100 p-4 flex items-center justify-center">
         <div className="max-w-md w-full space-y-6">
           <div className="text-center">
             <div className="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">

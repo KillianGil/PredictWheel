@@ -99,7 +99,7 @@ export function GameClient({ initialGameState }: GameClientProps) {
       .subscribe()
 
     // Polling fallback to ensure state is fresh even if websockets fail
-    const interval = setInterval(fetchLatestState, 2000)
+    const interval = setInterval(fetchLatestState, 1000)
 
     return () => {
       supabase.removeChannel(channel)

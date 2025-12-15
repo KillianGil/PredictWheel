@@ -1934,34 +1934,51 @@ function GamePlay({ initialGameState }) {
             }
         }
     };
-    const handleNextRound = async ()=>{
+    /* 
+   * LOGIQUE DE SYNCHRONISATION
+   * On utilise guess_position = 999 pour signifier "PRÊT"
+   */ const handlePlayerReady = async ()=>{
+        if (!currentPlayer) return;
+        // Marquer le joueur comme prêt (999)
+        await supabase.from("game_players").update({
+            guess_position: 999
+        }).eq("id", currentPlayer.id);
+        // Vérifier si tout le monde est prêt
+        const { data: allPlayers } = await supabase.from("game_players").select("*").eq("game_id", gameState.game.id);
+        // Si tout le monde est à 999 ou null (psychic), on lance la prochaine manche
+        // Note: Le psychic n'a pas besoin de cliquer, ou alors on l'oblige aussi
+        // Disons que TOUS les joueurs doivent être prêts
+        const everyoneReady = allPlayers?.every((p)=>p.guess_position === 999);
+        if (everyoneReady) {
+            triggerNextRound(allPlayers);
+        }
+    };
+    const triggerNextRound = async (currentPlayers)=>{
         // Get a new card
         const { data: cards } = await supabase.from("cards").select("*").eq("theme_id", gameState.theme?.id);
         if (!cards || cards.length === 0) return;
         const randomCard = cards[Math.floor(Math.random() * cards.length)];
         const targetPosition = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$lib$2f$game$2d$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["generateTargetPosition"])();
         // Rotate psychic to next player
-        const currentPsychicIndex = gameState.players.findIndex((p)=>p.is_psychic);
-        const nextPsychicIndex = (currentPsychicIndex + 1) % gameState.players.length;
-        const nextPsychic = gameState.players[nextPsychicIndex];
+        const currentPsychicIndex = currentPlayers.findIndex((p)=>p.is_psychic);
+        // Fallback if index -1
+        const safeIndex = currentPsychicIndex === -1 ? 0 : currentPsychicIndex;
+        const nextPsychicIndex = (safeIndex + 1) % currentPlayers.length;
+        const nextPsychic = currentPlayers[nextPsychicIndex];
         // Reset all players
-        for (const player of gameState.players){
+        for (const player of currentPlayers){
             await supabase.from("game_players").update({
                 is_psychic: player.id === nextPsychic.id,
                 guess_position: null
             }).eq("id", player.id);
         }
-        // Update game
+        // Update game to next round
         await supabase.from("games").update({
             current_round: gameState.game.current_round + 1,
             current_card_id: randomCard.id,
             target_position: targetPosition,
             current_clue: null
         }).eq("id", gameState.game.id);
-        setPhase("psychic");
-        setClue("");
-        setHasGuessed(false);
-        setGuessPosition(90);
     };
     const guessersWhoGuessed = gameState.players.filter((p)=>!p.is_psychic && p.guess_position !== null).length;
     const totalGuessers = gameState.players.filter((p)=>!p.is_psychic).length;
@@ -1976,20 +1993,20 @@ function GamePlay({ initialGameState }) {
                         className: "absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
                     }, void 0, false, {
                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                        lineNumber: 221,
+                        lineNumber: 243,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "absolute bottom-0 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl"
                     }, void 0, false, {
                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                        lineNumber: 222,
+                        lineNumber: 244,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                lineNumber: 220,
+                lineNumber: 242,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2007,12 +2024,12 @@ function GamePlay({ initialGameState }) {
                                             className: "h-5 w-5 text-primary"
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                            lineNumber: 230,
+                                            lineNumber: 252,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                        lineNumber: 229,
+                                        lineNumber: 251,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Badge"], {
@@ -2026,13 +2043,13 @@ function GamePlay({ initialGameState }) {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                        lineNumber: 232,
+                                        lineNumber: 254,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                lineNumber: 228,
+                                lineNumber: 250,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Badge"], {
@@ -2043,20 +2060,20 @@ function GamePlay({ initialGameState }) {
                                         className: "h-4 w-4"
                                     }, void 0, false, {
                                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                        lineNumber: 237,
+                                        lineNumber: 259,
                                         columnNumber: 13
                                     }, this),
                                     gameState.players.length
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                lineNumber: 236,
+                                lineNumber: 258,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                        lineNumber: 227,
+                        lineNumber: 249,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Card"], {
@@ -2074,17 +2091,17 @@ function GamePlay({ initialGameState }) {
                                 rightExtreme: gameState.currentCard?.right_extreme || "Extrême droite"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                lineNumber: 245,
+                                lineNumber: 267,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                            lineNumber: 244,
+                            lineNumber: 266,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                        lineNumber: 243,
+                        lineNumber: 265,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Card"], {
@@ -2101,14 +2118,14 @@ function GamePlay({ initialGameState }) {
                                                 className: "h-5 w-5"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                lineNumber: 264,
+                                                lineNumber: 286,
                                                 columnNumber: 19
                                             }, this),
                                             "Vous êtes le Médium"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                        lineNumber: 263,
+                                        lineNumber: 285,
                                         columnNumber: 17
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "text-foreground",
@@ -2118,17 +2135,17 @@ function GamePlay({ initialGameState }) {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                        lineNumber: 268,
+                                        lineNumber: 290,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                    lineNumber: 261,
+                                    lineNumber: 283,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                lineNumber: 260,
+                                lineNumber: 282,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -2143,12 +2160,12 @@ function GamePlay({ initialGameState }) {
                                                     children: "La cible est placée. Donnez un indice pour aider les autres joueurs à la trouver !"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                    lineNumber: 277,
+                                                    lineNumber: 299,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                lineNumber: 276,
+                                                lineNumber: 298,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2162,7 +2179,7 @@ function GamePlay({ initialGameState }) {
                                                         className: "h-12 text-base"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                        lineNumber: 282,
+                                                        lineNumber: 304,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -2174,18 +2191,18 @@ function GamePlay({ initialGameState }) {
                                                             className: "h-5 w-5"
                                                         }, void 0, false, {
                                                             fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                            lineNumber: 290,
+                                                            lineNumber: 312,
                                                             columnNumber: 21
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                        lineNumber: 289,
+                                                        lineNumber: 311,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                lineNumber: 281,
+                                                lineNumber: 303,
                                                 columnNumber: 17
                                             }, this)
                                         ]
@@ -2200,7 +2217,7 @@ function GamePlay({ initialGameState }) {
                                                         children: "L'indice du Médium :"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                        lineNumber: 300,
+                                                        lineNumber: 322,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2214,18 +2231,18 @@ function GamePlay({ initialGameState }) {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                            lineNumber: 302,
+                                                            lineNumber: 324,
                                                             columnNumber: 21
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                        lineNumber: 301,
+                                                        lineNumber: 323,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                lineNumber: 299,
+                                                lineNumber: 321,
                                                 columnNumber: 17
                                             }, this),
                                             !hasGuessed ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -2235,7 +2252,7 @@ function GamePlay({ initialGameState }) {
                                                 children: "Valider ma position"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                lineNumber: 306,
+                                                lineNumber: 328,
                                                 columnNumber: 19
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "p-4 bg-muted/50 rounded-xl text-center",
@@ -2250,12 +2267,12 @@ function GamePlay({ initialGameState }) {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                    lineNumber: 311,
+                                                    lineNumber: 333,
                                                     columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                lineNumber: 310,
+                                                lineNumber: 332,
                                                 columnNumber: 19
                                             }, this)
                                         ]
@@ -2268,7 +2285,7 @@ function GamePlay({ initialGameState }) {
                                                 children: "Votre indice :"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                lineNumber: 322,
+                                                lineNumber: 344,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2282,12 +2299,12 @@ function GamePlay({ initialGameState }) {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                    lineNumber: 324,
+                                                    lineNumber: 346,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                lineNumber: 323,
+                                                lineNumber: 345,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2301,13 +2318,13 @@ function GamePlay({ initialGameState }) {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                lineNumber: 326,
+                                                lineNumber: 348,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                        lineNumber: 321,
+                                        lineNumber: 343,
                                         columnNumber: 15
                                     }, this),
                                     phase === "reveal" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2320,12 +2337,12 @@ function GamePlay({ initialGameState }) {
                                                     children: "Résultats de la manche"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                    lineNumber: 336,
+                                                    lineNumber: 358,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                lineNumber: 335,
+                                                lineNumber: 357,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2344,7 +2361,7 @@ function GamePlay({ initialGameState }) {
                                                                 children: player.player_name
                                                             }, void 0, false, {
                                                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                                lineNumber: 364,
+                                                                lineNumber: 386,
                                                                 columnNumber: 27
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2358,7 +2375,7 @@ function GamePlay({ initialGameState }) {
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                                        lineNumber: 366,
+                                                                        lineNumber: 388,
                                                                         columnNumber: 29
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Badge"], {
@@ -2371,40 +2388,54 @@ function GamePlay({ initialGameState }) {
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                                        lineNumber: 369,
+                                                                        lineNumber: 391,
                                                                         columnNumber: 29
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                                lineNumber: 365,
+                                                                lineNumber: 387,
                                                                 columnNumber: 27
                                                             }, this)
                                                         ]
                                                     }, player.id, true, {
                                                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                        lineNumber: 360,
+                                                        lineNumber: 382,
                                                         columnNumber: 25
                                                     }, this);
                                                 })
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                lineNumber: 340,
+                                                lineNumber: 362,
                                                 columnNumber: 17
                                             }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
+                                            currentPlayer?.guess_position === 999 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "p-4 bg-muted/50 rounded-xl text-center border border-dashed border-slate-300",
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                    className: "text-muted-foreground animate-pulse",
+                                                    children: "En attente des autres joueurs..."
+                                                }, void 0, false, {
+                                                    fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
+                                                    lineNumber: 405,
+                                                    columnNumber: 21
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
+                                                lineNumber: 404,
+                                                columnNumber: 19
+                                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                                                 className: "w-full h-12 text-base font-semibold bg-indigo-500 hover:bg-indigo-600 rounded-xl",
-                                                onClick: handleNextRound,
+                                                onClick: handlePlayerReady,
                                                 children: isLastRound ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trophy$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Trophy$3e$__["Trophy"], {
                                                             className: "h-5 w-5 mr-2"
                                                         }, void 0, false, {
                                                             fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                            lineNumber: 384,
-                                                            columnNumber: 23
+                                                            lineNumber: 411,
+                                                            columnNumber: 25
                                                         }, this),
-                                                        "Voir les résultats"
+                                                        "Voir les résultats finaux"
                                                     ]
                                                 }, void 0, true) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
                                                     children: [
@@ -2412,33 +2443,33 @@ function GamePlay({ initialGameState }) {
                                                             className: "h-5 w-5 mr-2"
                                                         }, void 0, false, {
                                                             fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                            lineNumber: 389,
-                                                            columnNumber: 23
+                                                            lineNumber: 416,
+                                                            columnNumber: 25
                                                         }, this),
-                                                        "Manche suivante"
+                                                        "Prêt pour la suite"
                                                     ]
                                                 }, void 0, true)
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                lineNumber: 381,
-                                                columnNumber: 17
+                                                lineNumber: 408,
+                                                columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                        lineNumber: 334,
+                                        lineNumber: 356,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                lineNumber: 272,
+                                lineNumber: 294,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                        lineNumber: 259,
+                        lineNumber: 281,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Card"], {
@@ -2453,19 +2484,19 @@ function GamePlay({ initialGameState }) {
                                             className: "h-4 w-4 text-accent"
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                            lineNumber: 403,
+                                            lineNumber: 431,
                                             columnNumber: 15
                                         }, this),
                                         "Classement"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                    lineNumber: 402,
+                                    lineNumber: 430,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                lineNumber: 401,
+                                lineNumber: 429,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -2482,7 +2513,7 @@ function GamePlay({ initialGameState }) {
                                                             children: index + 1
                                                         }, void 0, false, {
                                                             fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                            lineNumber: 420,
+                                                            lineNumber: 448,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2493,19 +2524,19 @@ function GamePlay({ initialGameState }) {
                                                                     className: "inline-block h-4 w-4 ml-2 text-primary"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                                    lineNumber: 423,
+                                                                    lineNumber: 451,
                                                                     columnNumber: 47
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                            lineNumber: 421,
+                                                            lineNumber: 449,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                    lineNumber: 419,
+                                                    lineNumber: 447,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Badge"], {
@@ -2517,41 +2548,41 @@ function GamePlay({ initialGameState }) {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                                    lineNumber: 426,
+                                                    lineNumber: 454,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, player.id, true, {
                                             fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                            lineNumber: 412,
+                                            lineNumber: 440,
                                             columnNumber: 19
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                    lineNumber: 408,
+                                    lineNumber: 436,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                                lineNumber: 407,
+                                lineNumber: 435,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                        lineNumber: 400,
+                        lineNumber: 428,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-                lineNumber: 225,
+                lineNumber: 247,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/Desktop/PredictWheel/components/game-play.tsx",
-        lineNumber: 218,
+        lineNumber: 240,
         columnNumber: 5
     }, this);
 }
@@ -2640,7 +2671,7 @@ function GameClient({ initialGameState }) {
                 }));
         }).subscribe();
         // Polling fallback to ensure state is fresh even if websockets fail
-        const interval = setInterval(fetchLatestState, 2000);
+        const interval = setInterval(fetchLatestState, 1000);
         return ()=>{
             supabase.removeChannel(channel);
             clearInterval(interval);

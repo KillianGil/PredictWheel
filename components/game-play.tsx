@@ -168,22 +168,49 @@ export function GamePlay({ initialGameState }: GamePlayProps) {
     }
   }
 
-  const handleNextRound = async () => {
+  /* 
+   * LOGIQUE DE SYNCHRONISATION
+   * On utilise guess_position = 999 pour signifier "PRÊT"
+   */
+  const handlePlayerReady = async () => {
+    if (!currentPlayer) return
+
+    // Marquer le joueur comme prêt (999)
+    await supabase.from("game_players").update({ guess_position: 999 }).eq("id", currentPlayer.id)
+
+    // Vérifier si tout le monde est prêt
+    const { data: allPlayers } = await supabase
+      .from("game_players")
+      .select("*")
+      .eq("game_id", gameState.game.id)
+
+    // Si tout le monde est à 999 ou null (psychic), on lance la prochaine manche
+    // Note: Le psychic n'a pas besoin de cliquer, ou alors on l'oblige aussi
+    // Disons que TOUS les joueurs doivent être prêts
+    const everyoneReady = allPlayers?.every(p => p.guess_position === 999)
+
+    if (everyoneReady) {
+      triggerNextRound(allPlayers)
+    }
+  }
+
+  const triggerNextRound = async (currentPlayers: typeof gameState.players) => {
     // Get a new card
     const { data: cards } = await supabase.from("cards").select("*").eq("theme_id", gameState.theme?.id)
-
     if (!cards || cards.length === 0) return
 
     const randomCard = cards[Math.floor(Math.random() * cards.length)]
     const targetPosition = generateTargetPosition()
 
     // Rotate psychic to next player
-    const currentPsychicIndex = gameState.players.findIndex((p) => p.is_psychic)
-    const nextPsychicIndex = (currentPsychicIndex + 1) % gameState.players.length
-    const nextPsychic = gameState.players[nextPsychicIndex]
+    const currentPsychicIndex = currentPlayers.findIndex((p) => p.is_psychic)
+    // Fallback if index -1
+    const safeIndex = currentPsychicIndex === -1 ? 0 : currentPsychicIndex
+    const nextPsychicIndex = (safeIndex + 1) % currentPlayers.length
+    const nextPsychic = currentPlayers[nextPsychicIndex]
 
     // Reset all players
-    for (const player of gameState.players) {
+    for (const player of currentPlayers) {
       await supabase
         .from("game_players")
         .update({
@@ -193,7 +220,7 @@ export function GamePlay({ initialGameState }: GamePlayProps) {
         .eq("id", player.id)
     }
 
-    // Update game
+    // Update game to next round
     await supabase
       .from("games")
       .update({
@@ -203,11 +230,6 @@ export function GamePlay({ initialGameState }: GamePlayProps) {
         current_clue: null,
       })
       .eq("id", gameState.game.id)
-
-    setPhase("psychic")
-    setClue("")
-    setHasGuessed(false)
-    setGuessPosition(90)
   }
 
   const guessersWhoGuessed = gameState.players.filter((p) => !p.is_psychic && p.guess_position !== null).length
@@ -377,20 +399,26 @@ export function GamePlay({ initialGameState }: GamePlayProps) {
                       )
                     })}
                 </div>
-                {/* Allow host OR any player to advance (in case host left) */}
-                <Button className="w-full h-12 text-base font-semibold bg-indigo-500 hover:bg-indigo-600 rounded-xl" onClick={handleNextRound}>
-                  {isLastRound ? (
-                    <>
-                      <Trophy className="h-5 w-5 mr-2" />
-                      Voir les résultats
-                    </>
-                  ) : (
-                    <>
-                      <ArrowRight className="h-5 w-5 mr-2" />
-                      Manche suivante
-                    </>
-                  )}
-                </Button>
+                {/* Synchronized ready button */}
+                {currentPlayer?.guess_position === 999 ? (
+                  <div className="p-4 bg-muted/50 rounded-xl text-center border border-dashed border-slate-300">
+                    <p className="text-muted-foreground animate-pulse">En attente des autres joueurs...</p>
+                  </div>
+                ) : (
+                  <Button className="w-full h-12 text-base font-semibold bg-indigo-500 hover:bg-indigo-600 rounded-xl" onClick={handlePlayerReady}>
+                    {isLastRound ? (
+                      <>
+                        <Trophy className="h-5 w-5 mr-2" />
+                        Voir les résultats finaux
+                      </>
+                    ) : (
+                      <>
+                        <ArrowRight className="h-5 w-5 mr-2" />
+                        Prêt pour la suite
+                      </>
+                    )}
+                  </Button>
+                )}
               </div>
             )}
           </CardContent>

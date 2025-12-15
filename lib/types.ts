@@ -68,7 +68,7 @@ export interface LocalGameState {
   targetPosition: number | null
   currentClue: string | null
   currentPsychicIndex: number
-  phase: "setup" | "psychic-view" | "psychic-clue" | "guessing" | "reveal" | "finished"
+  phase: "setup" | "setup-card" | "psychic-view" | "psychic-clue" | "guessing" | "reveal" | "finished"
   guesses: { playerId: string; position: number }[]
   usedCards?: { leftExtreme: string; rightExtreme: string }[]
 }

@@ -26,6 +26,41 @@ export function GameClient({ initialGameState }: GameClientProps) {
       return
     }
 
+    // Fonction de rafraîchissement
+    const fetchLatestState = async () => {
+      const { data: latestGame } = await supabase
+        .from("games")
+        .select("*")
+        .eq("id", gameState.game.id)
+        .single()
+
+      if (latestGame) {
+        let currentCard = gameState.currentCard
+        let theme = gameState.theme
+
+        if (latestGame.current_card_id && latestGame.current_card_id !== gameState.currentCard?.id) {
+          const { data } = await supabase.from("cards").select("*").eq("id", latestGame.current_card_id).single()
+          if (data) currentCard = data
+        }
+
+        if (latestGame.theme_id && latestGame.theme_id !== gameState.theme?.id) {
+          const { data } = await supabase.from("themes").select("*").eq("id", latestGame.theme_id).single()
+          if (data) theme = data
+        }
+
+        // Only update if something changed to avoid render loops (simple equality check on updated_at could correspond)
+        // Here we just set state, React handles diffing usually, but for complex objects:
+        if (JSON.stringify(latestGame) !== JSON.stringify(gameState.game)) {
+          setGameState((prev) => ({
+            ...prev,
+            game: latestGame,
+            currentCard,
+            theme,
+          }))
+        }
+      }
+    }
+
     // S'abonner aux changements de la partie
     const channel = supabase
       .channel(`game-state-${gameState.game.id}`)
@@ -63,10 +98,14 @@ export function GameClient({ initialGameState }: GameClientProps) {
       )
       .subscribe()
 
+    // Polling fallback to ensure state is fresh even if websockets fail
+    const interval = setInterval(fetchLatestState, 2000)
+
     return () => {
       supabase.removeChannel(channel)
+      clearInterval(interval)
     }
-  }, [gameState.game.id, supabase, sessionId, router])
+  }, [gameState.game.id, supabase, sessionId, router, gameState.currentCard?.id, gameState.theme?.id, gameState.game])
 
   const handleStartGame = async () => {
     console.log("Starting game...")
@@ -75,9 +114,10 @@ export function GameClient({ initialGameState }: GameClientProps) {
     const themeId = gameState.theme?.id || "tous"
     console.log("Theme ID:", themeId)
 
-    // Fetch cards - if "tous", get all cards, otherwise filter by theme
+    // Fetch cards - if "tous" or random/custom (handled as logic in lobby?), get all or filter
+    // Note: if "tous" was removed from UI but code sends "tous" as fallback, we usually treat it as all.
     let cards
-    if (themeId === "tous") {
+    if (themeId === "tous" || themeId === "random") {
       // @ts-ignore
       const { data } = await supabase.from("cards").select("*")
       cards = data
@@ -91,7 +131,7 @@ export function GameClient({ initialGameState }: GameClientProps) {
 
     if (!cards || cards.length === 0) {
       console.error("No cards found for theme:", themeId)
-      alert("Erreur: Aucune carte trouvée. Veuillez patienter quelques secondes pendant la synchronisation puis réessayer.")
+      // alert("Erreur: Aucune carte trouvée...") // Removed alert
       return
     }
 
@@ -99,9 +139,19 @@ export function GameClient({ initialGameState }: GameClientProps) {
     const targetPosition = generateTargetPosition()
 
     // Récupérer la liste à jour des joueurs
-    const { data: currentPlayers } = await supabase.from("game_players").select("*").eq("game_id", gameState.game.id)
+    const { data: currentPlayers, error: playersError } = await supabase.from("game_players").select("*").eq("game_id", gameState.game.id)
 
-    if (!currentPlayers || currentPlayers.length < 2) return
+    if (playersError) {
+      console.error("Error fetching players:", playersError)
+      return
+    }
+
+    console.log("Current players for start:", currentPlayers?.length)
+
+    if (!currentPlayers || currentPlayers.length < 2) {
+      // alert("Il faut au moins 2 joueurs...") // Removed alert for cleaner UX (or could use toast)
+      return
+    }
 
     const randomPsychic = currentPlayers[Math.floor(Math.random() * currentPlayers.length)]
 
@@ -119,7 +169,7 @@ export function GameClient({ initialGameState }: GameClientProps) {
 
     // Démarrer la partie
     // @ts-ignore
-    await supabase
+    const { error: updateError } = await supabase
       .from("games")
       .update({
         status: "playing",
@@ -129,6 +179,10 @@ export function GameClient({ initialGameState }: GameClientProps) {
         current_clue: null,
       })
       .eq("id", gameState.game.id)
+
+    if (updateError) {
+      console.error("Failed to start game", updateError)
+    }
   }
 
   if (gameState.game.status === "waiting") {

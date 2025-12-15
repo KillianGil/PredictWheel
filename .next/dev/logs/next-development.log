@@ -1,987 +1,89 @@
-[00:00:00.661] Server  LOG      ✓ Ready in 419ms
-[00:00:02.843] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:02.963] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:02.963] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:00:02.963] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765449547036}
-[00:01:26.834] Server  LOG      ✓ Compiled in 159ms
-[00:01:51.593] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:51.712] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:01:51.712] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:01:51.712] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765449655783}
-[00:04:05.378] Server  LOG      ✓ Compiled in 77ms
-[00:04:36.535] Server  LOG      ✓ Compiled in 58ms
-[00:05:15.754] Server  LOG      ✓ Compiled in 95ms
-[00:06:18.882] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:06:19.021] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:06:19.021] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:06:19.021] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765449923086}
-[00:08:35.308] Server  LOG      ✓ Compiled in 81ms
-[00:08:48.809] Server  LOG      ✓ Compiled in 61ms
-[00:08:50.531] Server  LOG      ✓ Compiled in 31ms
-[00:09:02.868] Server  LOG      ✓ Compiled in 53ms
-[00:09:03.993] Server  LOG      ✓ Compiled in 29ms
-[00:09:06.676] Server  LOG      ✓ Compiled in 42ms
-[00:09:10.420] Server  LOG      ✓ Compiled in 27ms
-[00:09:18.273] Server  LOG      ✓ Compiled in 52ms
-[00:09:20.273] Server  LOG      ✓ Compiled in 34ms
-[00:13:01.424] Server  LOG      ✓ Compiled in 55ms
-[00:13:04.172] Server  LOG      ✓ Compiled in 23ms
-[00:24:14.720] Server  LOG      ✓ Compiled in 70ms
-[00:24:15.723] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:24:41.230] Server  LOG      ✓ Compiled in 33ms
-[00:24:41.722] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:24:59.730] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:25:06.723] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:25:08.721] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:25:11.726] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:25:15.720] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:25:23.729] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:25:26.721] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:25:33.722] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:25:40.721] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:25:41.721] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:25:43.721] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:25:44.721] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:25:46.721] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:25:49.721] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:26:08.720] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:26:09.721] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:26:18.722] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:26:34.722] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:26:42.721] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:26:45.720] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:10:1
-Parsing ecmascript source code failed
-   8 | export const LOCAL_CARDS: LocalCard[] = [
-   9 |   // Classique
-> 10 | const extremes = [
-     | ^^^^^
-  11 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  12 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  13 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:26:46.721] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:12:1
-Parsing ecmascript source code failed
-  10 | export const LOCAL_CARDS: LocalCard[] = [
-  11 |   // Classique
-> 12 | const extremes = [
-     | ^^^^^
-  13 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  14 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  15 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:26:50.722] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:12:1
-Parsing ecmascript source code failed
-  10 | export const LOCAL_CARDS: LocalCard[] = [
-  11 |   // Classique
-> 12 | const extremes = [
-     | ^^^^^
-  13 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  14 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  15 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:26:52.721] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:12:1
-Parsing ecmascript source code failed
-  10 | export const LOCAL_CARDS: LocalCard[] = [
-  11 |   // Classique
-> 12 | const extremes = [
-     | ^^^^^
-  13 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  14 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  15 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:27:08.721] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:12:1
-Parsing ecmascript source code failed
-  10 | export const LOCAL_CARDS: LocalCard[] = [
-  11 |   // Classique
-> 12 | const extremes = [
-     | ^^^^^
-  13 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  14 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  15 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:27:13.722] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:12:1
-Parsing ecmascript source code failed
-  10 | export const LOCAL_CARDS: LocalCard[] = [
-  11 |   // Classique
-> 12 | const extremes = [
-     | ^^^^^
-  13 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  14 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  15 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:27:15.720] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:12:1
-Parsing ecmascript source code failed
-  10 | export const LOCAL_CARDS: LocalCard[] = [
-  11 |   // Classique
-> 12 | const extremes = [
-     | ^^^^^
-  13 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  14 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  15 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:27:18.726] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:12:1
-Parsing ecmascript source code failed
-  10 | export const LOCAL_CARDS: LocalCard[] = [
-  11 |   // Classique
-> 12 | const extremes = [
-     | ^^^^^
-  13 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  14 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  15 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:27:21.721] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:12:1
-Parsing ecmascript source code failed
-  10 | export const LOCAL_CARDS: LocalCard[] = [
-  11 |   // Classique
-> 12 | const extremes = [
-     | ^^^^^
-  13 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  14 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  15 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:27:24.723] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:12:1
-Parsing ecmascript source code failed
-  10 | export const LOCAL_CARDS: LocalCard[] = [
-  11 |   // Classique
-> 12 | const extremes = [
-     | ^^^^^
-  13 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  14 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  15 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:27:25.729] Browser ERROR   ./Desktop/PredictWheel/lib/local-cards.ts:12:1
-Parsing ecmascript source code failed
-  10 | export const LOCAL_CARDS: LocalCard[] = [
-  11 |   // Classique
-> 12 | const extremes = [
-     | ^^^^^
-  13 |   // --- CLASSIQUE (Relations, Vie sociale, Général) ---
-  14 |   // Indices attendus : Une situation, un lieu, une phrase, un objet.
-  15 |   { leftExtreme: "Pire façon de larguer", rightExtreme: "Rupture avec classe", theme: "classique" },
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component Browser]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/lib/local-cards.ts [Client Component SSR]
-    ./Desktop/PredictWheel/components/local-game.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[00:31:33.848] Server  LOG      ✓ Compiled in 92ms
-[00:31:36.339] Server  LOG      ✓ Compiled in 44ms
-[00:31:37.506] Server  LOG      ✓ Compiled in 43ms
-[00:31:47.440] Server  LOG      ✓ Compiled in 36ms
-[00:31:52.742] Server  LOG      ✓ Compiled in 40ms
-[00:31:57.144] Server  LOG      ✓ Compiled in 44ms
-[00:32:02.508] Server  LOG      ✓ Compiled in 42ms
-[00:32:04.860] Server  LOG      ✓ Compiled in 25ms
-[00:32:07.520] Server  LOG      ✓ Compiled in 22ms
-[00:32:09.441] Server  LOG      ✓ Compiled in 25ms
-[00:32:13.416] Server  LOG      ✓ Compiled in 36ms
-[00:32:15.845] Server  LOG      ✓ Compiled in 26ms
-[00:32:25.963] Server  LOG      ✓ Compiled in 51ms
-[00:32:28.075] Server  LOG      ✓ Compiled in 39ms
-[00:32:31.116] Server  LOG      ✓ Compiled in 34ms
-[00:32:33.967] Server  LOG      ✓ Compiled in 48ms
-[00:32:40.061] Server  LOG      ✓ Compiled in 33ms
-[00:32:47.126] Server  LOG      ✓ Compiled in 23ms
-[00:32:56.555] Server  LOG      ✓ Compiled in 39ms
-[00:33:05.773] Server  LOG      ✓ Compiled in 39ms
-[00:34:18.227] Server  LOG      ✓ Compiled in 61ms
-[00:34:21.636] Server  LOG      ✓ Compiled in 49ms
-[00:34:24.434] Server  LOG      ✓ Compiled in 27ms
-[00:34:27.592] Server  LOG      ✓ Compiled in 45ms
-[00:34:29.207] Server  LOG      ✓ Compiled in 39ms
-[00:34:41.624] Server  LOG      ✓ Compiled in 41ms
-[00:34:43.625] Server  LOG      ✓ Compiled in 23ms
-[00:34:46.857] Server  LOG      ✓ Compiled in 39ms
-[00:34:48.811] Server  LOG      ✓ Compiled in 21ms
-[00:35:04.353] Server  LOG      ✓ Compiled in 37ms
-[00:35:07.765] Server  LOG      ✓ Compiled in 35ms
-[00:35:09.548] Server  LOG      ✓ Compiled in 42ms
-[00:35:13.948] Server  LOG      ✓ Compiled in 91ms
-[00:35:16.199] Server  LOG      ✓ Compiled in 40ms
-[00:35:56.367] Server  LOG      ✓ Compiled in 70ms
-[00:36:07.894] Server  LOG      ✓ Compiled in 26ms
-[00:36:12.436] Server  LOG      ✓ Compiled in 20ms
-[00:36:14.879] Server  LOG      ✓ Compiled in 22ms
-[00:37:53.902] Server  LOG      ✓ Compiled in 68ms
-[00:37:59.369] Server  LOG      ✓ Compiled in 36ms
-[00:38:02.129] Server  LOG      ✓ Compiled in 39ms
-[00:38:22.051] Server  LOG      ✓ Compiled in 47ms
-[00:38:24.069] Server  LOG      ✓ Compiled in 71ms
-[00:38:25.774] Server  LOG      ✓ Compiled in 34ms
-[00:38:45.486] Server  LOG      ✓ Compiled in 48ms
-[00:38:50.162] Server  LOG      ✓ Compiled in 41ms
-[00:38:52.017] Server  LOG      ✓ Compiled in 23ms
-[00:43:13.652] Server  LOG      ✓ Compiled in 54ms
-[00:43:45.761] Server  LOG      ✓ Compiled in 63ms
-[00:43:56.870] Server  LOG      ✓ Compiled in 49ms
-[00:44:02.128] Server  LOG      ✓ Compiled in 49ms
-[00:44:04.878] Server  LOG      ✓ Compiled in 30ms
-[00:44:07.382] Server  LOG      ✓ Compiled in 46ms
-[00:44:14.700] Server  LOG      ✓ Compiled in 61ms
-[00:44:16.143] Server  LOG      ✓ Compiled in 28ms
-[00:44:22.961] Server  LOG      ✓ Compiled in 61ms
-[00:44:50.278] Server  LOG      ✓ Compiled in 51ms
-[00:45:59.042] Server  LOG      ✓ Compiled in 63ms
-[00:46:02.557] Server  LOG      ✓ Compiled in 44ms
-[00:46:08.275] Server  LOG      ✓ Compiled in 42ms
-[00:46:12.158] Server  LOG      ✓ Compiled in 23ms
-[00:49:15.583] Server  LOG      ✓ Compiled in 70ms
-[00:49:17.068] Server  LOG      ✓ Compiled in 26ms
-[00:49:27.894] Server  LOG      ✓ Compiled in 52ms
-[00:49:31.829] Server  LOG      ✓ Compiled in 75ms
-[00:49:37.967] Server  LOG      ✓ Compiled in 35ms
-[00:49:41.113] Server  LOG      ✓ Compiled in 25ms
-[00:49:42.542] Server  LOG      ✓ Compiled in 23ms
-[00:49:48.284] Server  LOG      ✓ Compiled in 22ms
-[00:49:53.413] Server  LOG      ✓ Compiled in 27ms
-[00:49:55.501] Server  LOG      ✓ Compiled in 71ms
-[00:50:01.442] Server  LOG      ✓ Compiled in 37ms
-[00:50:08.601] Server  LOG      ✓ Compiled in 20ms
-[00:50:11.822] Server  LOG      ✓ Compiled in 47ms
-[00:50:25.206] Server  LOG      ✓ Compiled in 49ms
-[00:51:39.820] Server  LOG      ✓ Compiled in 45ms
-[00:51:53.829] Server  LOG      ✓ Compiled in 53ms
-[00:51:58.823] Server  LOG      ✓ Compiled in 50ms
-[00:52:22.219] Server  LOG      ✓ Compiled in 55ms
-[00:52:29.099] Server  LOG      ✓ Compiled in 34ms
-[00:52:32.674] Server  LOG      ✓ Compiled in 33ms
-[00:52:35.716] Server  LOG      ✓ Compiled in 44ms
-[00:52:38.383] Server  LOG      ✓ Compiled in 20ms
-[00:53:01.032] Server  LOG      ✓ Compiled in 64ms
-[00:54:39.375] Server  LOG      ✓ Compiled in 63ms
-[00:54:54.259] Server  LOG      ✓ Compiled in 30ms
-[00:55:28.827] Server  LOG      ✓ Compiled in 52ms
-[00:55:32.961] Server  LOG      ✓ Compiled in 28ms
-[00:55:36.085] Server  LOG      ✓ Compiled in 29ms
-[00:55:41.490] Server  LOG      ✓ Compiled in 72ms
-[00:55:44.621] Server  LOG      ✓ Compiled in 39ms
-[00:55:54.818] Server  LOG      ✓ Compiled in 41ms
-[00:55:56.168] Server  LOG      ✓ Compiled in 29ms
-[00:55:57.818] Server  LOG      ✓ Compiled in 40ms
-[00:56:05.201] Server  LOG      ✓ Compiled in 41ms
-[00:56:10.956] Server  LOG      ✓ Compiled in 19ms
-[00:56:21.114] Server  LOG      ✓ Compiled in 41ms
-[00:56:25.563] Server  LOG      ✓ Compiled in 25ms
-[00:56:30.655] Server  LOG      ✓ Compiled in 22ms
-[00:56:33.249] Server  LOG      ✓ Compiled in 25ms
-[00:56:37.645] Server  LOG      ✓ Compiled in 33ms
-[00:56:41.234] Server  LOG      ✓ Compiled in 37ms
-[00:56:47.060] Server  LOG      ✓ Compiled in 19ms
-[00:56:49.785] Server  LOG      ✓ Compiled in 21ms
-[00:57:00.486] Server  LOG      ✓ Compiled in 27ms
-[00:57:02.150] Server  LOG      ✓ Compiled in 32ms
-[00:57:28.441] Server  LOG      ✓ Compiled in 48ms
-[00:58:02.543] Server  LOG      ✓ Compiled in 45ms
-[00:58:05.659] Server  LOG      ✓ Compiled in 38ms
-[00:58:13.190] Server  LOG      ✓ Compiled in 28ms
-[00:58:16.257] Server  LOG      ✓ Compiled in 35ms
-[00:58:18.824] Server  LOG      ✓ Compiled in 48ms
-[00:58:31.453] Server  LOG      ✓ Compiled in 59ms
-[00:58:35.562] Server  LOG      ✓ Compiled in 43ms
-[00:58:39.822] Server  LOG      ✓ Compiled in 36ms
-[00:58:49.742] Server  LOG      ✓ Compiled in 60ms
-[00:58:56.676] Server  LOG      ✓ Compiled in 35ms
-[00:59:02.593] Server  LOG      ✓ Compiled in 37ms
-[00:59:29.197] Server  LOG      ✓ Compiled in 62ms
-[00:59:58.729] Server  LOG      ✓ Compiled in 33ms
-[01:00:01.942] Server  LOG      ✓ Compiled in 41ms
-[01:00:03.568] Server  LOG      ✓ Compiled in 23ms
-[01:00:23.138] Server  LOG      ✓ Compiled in 423ms
-[01:01:50.733] Server  LOG      ✓ Compiled in 107ms
-[01:02:04.080] Server  LOG      ✓ Compiled in 71ms
-[01:02:12.833] Server  LOG      ✓ Compiled in 77ms
-[01:02:16.858] Server  LOG      ✓ Compiled in 27ms
-[01:02:19.817] Server  LOG      ✓ Compiled in 44ms
-[01:02:26.375] Server  LOG      ✓ Compiled in 36ms
-[01:02:37.148] Server  LOG      ✓ Compiled in 33ms
-[01:02:42.359] Server  LOG      ✓ Compiled in 22ms
-[01:02:46.750] Server  LOG      ✓ Compiled in 26ms
-[01:02:52.159] Server  LOG      ✓ Compiled in 25ms
-[01:02:59.733] Server  LOG      ✓ Compiled in 33ms
-[01:03:11.974] Server  LOG      ✓ Compiled in 63ms
-[01:03:30.431] Server  LOG      ✓ Compiled in 48ms
-[01:03:34.007] Server  LOG      ✓ Compiled in 32ms
-[01:03:36.808] Server  LOG      ✓ Compiled in 28ms
-[01:04:00.345] Server  LOG      ✓ Compiled in 67ms
-[01:07:24.343] Server  LOG      ✓ Compiled in 188ms
-[01:14:56.889] Server  LOG      ✓ Compiled in 61ms
-[01:15:21.208] Server  LOG      ✓ Compiled in 186ms
-[01:15:32.928] Server  LOG      ✓ Compiled in 101ms
-[01:15:51.560] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:15:51.706] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[01:15:51.706] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[01:15:51.706] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765454095731}
-[05:35:55.218] Server  LOG      ✓ Compiled in 555ms
-[05:35:55.519] Browser ERROR   ./Desktop/PredictWheel/app/page.tsx:280:6
-Parsing ecmascript source code failed
-  278 |     </div>
-  279 |   )
-> 280 |     </div >
-      |      ^^^^^^
-  281 |   )
-  282 | }
-  283 |
-
-Unterminated regexp literal
-
-Import traces:
-  Client Component Browser:
-    ./Desktop/PredictWheel/app/page.tsx [Client Component Browser]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./Desktop/PredictWheel/app/page.tsx [Client Component SSR]
-    ./Desktop/PredictWheel/app/page.tsx [Server Component]
-[05:37:50.580] Server  LOG      ✓ Compiled in 290ms
-[05:38:07.582] Server  LOG      ✓ Compiled in 141ms
-[05:40:45.768] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/V92TFX color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/V92TFX","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765469989711}
-[05:41:55.440] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765470059384}
-[05:43:10.500] Server  LOG      ✓ Compiled in 150ms
-[05:44:07.757] Server  LOG      ✓ Compiled in 217ms
-[05:45:37.635] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[05:45:37.785] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[05:45:37.785] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[05:45:37.785] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765470281730}
-[05:45:51.390] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765470295330}
-[05:49:15.708] Server  LOG      ✓ Compiled in 160ms
-[05:50:08.355] Server  LOG      ✓ Compiled in 136ms
-[05:50:51.990] Browser LOG     Starting game...
-[05:50:51.990] Browser LOG     Theme ID: tous
-[05:50:52.141] Browser LOG     Cards found: 45
-[05:50:56.574] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[05:50:56.762] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+[00:00:00.904] Server  LOG      ✓ Ready in 634ms
+[00:00:07.002] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:07.156] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:07.156] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:00:07.156] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765818911686}
+[00:01:16.729] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/TZJKDD color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/TZJKDD","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765818981255}
+[00:02:16.056] Browser LOG     Starting game...
+[00:02:16.056] Browser LOG     Theme ID: tous
+[00:02:16.338] Browser LOG     Cards found: 45
+[00:02:16.520] Browser LOG     Current players for start: 2
+[00:02:18.050] Browser LOG     Starting game...
+[00:02:18.050] Browser LOG     Theme ID: tous
+[00:02:18.250] Browser LOG     Cards found: 45
+[00:02:18.250] Browser LOG     Starting game...
+[00:02:18.250] Browser LOG     Theme ID: tous
+[00:02:18.416] Browser LOG     Current players for start: 2
+[00:02:18.416] Browser LOG     Starting game...
+[00:02:18.416] Browser LOG     Theme ID: tous
+[00:02:18.598] Browser LOG     Cards found: 45
+[00:02:18.598] Browser LOG     Starting game...
+[00:02:18.598] Browser LOG     Theme ID: tous
+[00:02:18.766] Browser LOG     Current players for start: 2
+[00:02:18.766] Browser LOG     Cards found: 45
+[00:02:18.766] Browser LOG     Starting game...
+[00:02:18.766] Browser LOG     Theme ID: tous
+[00:02:18.987] Browser LOG     Starting game...
+[00:02:18.987] Browser LOG     Theme ID: tous
+[00:02:18.987] Browser LOG     Cards found: 45
+[00:02:18.987] Browser LOG     Current players for start: 2
+[00:02:19.168] Browser LOG     Starting game...
+[00:02:19.168] Browser LOG     Theme ID: tous
+[00:02:19.168] Browser LOG     Cards found: 45
+[00:02:19.168] Browser LOG     Current players for start: 2
+[00:02:19.355] Browser LOG     Starting game...
+[00:02:19.355] Browser LOG     Theme ID: tous
+[00:02:19.355] Browser LOG     Cards found: 45
+[00:02:19.513] Browser LOG     Starting game...
+[00:02:19.513] Browser LOG     Theme ID: tous
+[00:02:19.513] Browser LOG     Current players for start: 2
+[00:02:19.513] Browser LOG     Cards found: 45
+[00:02:20.093] Browser LOG     Starting game...
+[00:02:20.093] Browser LOG     Theme ID: tous
+[00:02:20.093] Browser LOG     Current players for start: 2
+[00:02:20.093] Browser LOG     Cards found: 45
+[00:02:20.093] Browser LOG     Starting game...
+[00:02:20.093] Browser LOG     Theme ID: tous
+[00:02:20.093] Browser LOG     Current players for start: 2
+[00:02:20.093] Browser LOG     Cards found: 45
+[00:02:20.093] Browser LOG     Starting game...
+[00:02:20.093] Browser LOG     Theme ID: tous
+[00:02:20.093] Browser LOG     Current players for start: 2
+[00:02:20.093] Browser LOG     Cards found: 45
+[00:02:20.262] Browser LOG     Current players for start: 2
+[00:02:20.262] Browser LOG     Starting game...
+[00:02:20.262] Browser LOG     Theme ID: tous
+[00:02:20.262] Browser LOG     Cards found: 45
+[00:02:20.434] Browser LOG     Current players for start: 2
+[00:02:20.434] Browser LOG     Cards found: 45
+[00:02:20.590] Browser LOG     Current players for start: 2
+[00:02:20.590] Browser LOG     Cards found: 45
+[00:02:20.739] Browser LOG     Current players for start: 2
+[00:02:20.914] Browser LOG     Current players for start: 2
+[00:02:21.268] Browser LOG     Starting game...
+[00:02:21.268] Browser LOG     Theme ID: tous
+[00:02:21.434] Browser LOG     Cards found: 45
+[00:02:21.434] Browser LOG     Starting game...
+[00:02:21.434] Browser LOG     Theme ID: tous
+[00:02:21.618] Browser LOG     Current players for start: 2
+[00:02:21.618] Browser LOG     Cards found: 45
+[00:02:21.618] Browser LOG     Starting game...
+[00:02:21.618] Browser LOG     Theme ID: tous
+[00:02:21.816] Browser LOG     Cards found: 45
+[00:02:21.816] Browser LOG     Current players for start: 2
+[00:02:21.816] Browser LOG     Starting game...
+[00:02:21.816] Browser LOG     Theme ID: tous
+[00:02:21.986] Browser LOG     Current players for start: 2
+[00:02:21.986] Browser LOG     Cards found: 45
+[00:02:22.152] Browser LOG     Current players for start: 2
+[00:02:24.017] Browser LOG     Starting game...
+[00:02:24.017] Browser LOG     Theme ID: tous
+[00:02:24.196] Browser LOG     Cards found: 45
+[00:02:24.381] Browser LOG     Current players for start: 2
+[00:04:00.007] Server  LOG      ✓ Compiled in 213ms
+[00:04:01.747] Server  LOG      ✓ Compiled in 51ms
+[00:04:40.406] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:40.577] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
 
 - A server/client branch `if (typeof window !== 'undefined')`.
 - Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
@@ -991,190 +93,67 @@ Import traces:
 
 It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
 
-https://react.dev/link/hydration-mismatch
+%s%s https://react.dev/link/hydration-mismatch 
 
   ...
-    <InnerLayoutRouter url="/game/YYTS7C" tree={[...]} params={{code:"YYTS7C"}} cacheNode={{lazyData:null, ...}} ...>
-      <SegmentViewNode type="page" pagePath="/Desktop/P...">
-        <SegmentTrieNode>
-        <GamePage>
-          <GameClient initialGameState={{...}}>
-            <GamePlay initialGameState={{...}}>
-              <div className="min-h-scre...">
+    <SegmentViewNode type="page" pagePath="/Desktop/P...">
+      <SegmentTrieNode>
+      <GamePage>
+        <GameClient initialGameState={{...}}>
+          <GamePlay initialGameState={{...}}>
+            <div className="min-h-scre...">
+              <div>
+              <div className="relative m...">
                 <div>
-                <div className="relative m...">
-                  <div>
-                  <Card className="shadow-lg ...">
-                    <div data-slot="card" className="bg-card te...">
-                      <CardContent className="pt-8 pb-6">
-                        <div data-slot="card-content" className="px-6 pt-8 ...">
-                          <WavelengthWheel targetPosition={56} showTarget={true} showZones={false} guessPosition={90} ...>
-                            <div className="w-full mx-..." ref={{current:null}}>
-                              <svg viewBox="0 0 400 230" className="w-full h-a..." onMouseDown={function handleMouseDown} ...>
-                                <path>
-                                <path>
-                                <path>
-                                <line>
-                                <line>
-                                <line>
-                                <line>
-                                <line>
-                                <line>
-                                <line
-                                  x1={114.99999999999996}
-+                                 y1={52.775681356645464}
--                                 y1="52.775681356645435"
-                                  x2={112.49999999999996}
-                                  y2={48.44555433772325}
-                                  stroke="#94a3b8"
-                                  strokeWidth="1"
-                                >
-                                ...
-                                <g className="transition...">
-                                  <line
-                                    x1="200"
-                                    y1="205"
-+                                   x2={113.32509996203426}
--                                   x2="200"
-+                                   y2={76.49917625396853}
--                                   y2="50"
-                                    stroke="rgba(0,0,0,0.1)"
-+                                   strokeWidth={4}
--                                   strokeWidth="5"
-                                    strokeLinecap="round"
-                                  >
-                                  <line
-                                    x1="200"
-                                    y1="200"
-+                                   x2={113.32509996203426}
--                                   x2="200"
-+                                   y2={71.49917625396853}
--                                   y2="45"
-+                                   stroke="#3b82f6"
--                                   stroke="#ef4444"
-+                                   strokeWidth={4}
--                                   strokeWidth="5"
-                                    strokeLinecap="round"
-                                  >
-                                  <circle
-                                    cx="200"
-                                    cy="200"
-+                                   r={4}
--                                   r="6"
-+                                   fill="#3b82f6"
--                                   fill="#ef4444"
-                                  >
-+                               <g className="transition-transform duration-500 ease-out">
--                               <circle cx="200" cy="200" r="25" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="2">
-                                ...
+                <Card className="shadow-lg ...">
+                  <div data-slot="card" className="bg-card te...">
+                    <CardContent className="pt-8 pb-6">
+                      <div data-slot="card-content" className="px-6 pt-8 ...">
+                        <WavelengthWheel targetPosition={120} showTarget={undefined} showZones={undefined} ...>
+                          <div className="w-full mx-..." ref={{current:null}}>
+                            <svg viewBox="0 0 400 230" className="w-full h-a..." onMouseDown={function handleMouseDown} ...>
+                              <path>
+                              <path>
+                              <path>
+                              <line>
+                              <line>
+                              <line>
+                              <line>
+                              <line>
+                              <line>
+                              <line
+                                x1={114.99999999999996}
++                               y1={52.775681356645464}
+-                               y1="52.775681356645435"
+                                x2={112.49999999999996}
+                                y2={48.44555433772325}
+                                stroke="#94a3b8"
+                                strokeWidth="1"
+                              >
                               ...
-                  ...
-      ...
+                              ...
+                            ...
+                ...
+    ...
 
-[05:50:56.762] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[05:50:56.762] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
-[05:50:56.762] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
-[05:50:56.762] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765470600706}
-[05:50:56.762] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765470600706}
-[06:48:19.619] Server  LOG      ✓ Compiled in 161ms
-[07:10:29.911] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[07:10:30.111] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
-
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-https://react.dev/link/hydration-mismatch
-
-  ...
-    <RedirectErrorBoundary router={{...}}>
-      <InnerLayoutRouter url="/game/YYTS7C" tree={[...]} params={{code:"YYTS7C"}} cacheNode={{lazyData:null, ...}} ...>
-        <SegmentViewNode type="page" pagePath="/Desktop/P...">
-          <SegmentTrieNode>
-          <GamePage>
-            <GameClient initialGameState={{...}}>
-              <GamePlay initialGameState={{...}}>
-                <div className="min-h-scre...">
-                  <div>
-                  <div className="relative m...">
-                    <div>
-                    <Card className="shadow-lg ...">
-                      <div data-slot="card" className="bg-card te...">
-                        <CardContent className="pt-8 pb-6">
-                          <div data-slot="card-content" className="px-6 pt-8 ...">
-                            <WavelengthWheel targetPosition={56} showTarget={false} showZones={false} guessPosition={90} ...>
-                              <div className="w-full mx-..." ref={{current:null}}>
-                                <svg
-                                  viewBox="0 0 400 230"
-+                                 className="w-full h-auto touch-none select-none"
--                                 className="w-full h-auto touch-none select-none cursor-pointer"
-                                  onMouseDown={function handleMouseDown}
-                                  onTouchStart={function handleTouchStart}
-                                >
-                                  <path>
-                                  <path>
-                                  <path>
-                                  <line>
-                                  <line>
-                                  <line>
-                                  <line>
-                                  <line>
-                                  <line>
-                                  <line
-                                    x1={114.99999999999996}
-+                                   y1={52.775681356645464}
--                                   y1="52.775681356645435"
-                                    x2={112.49999999999996}
-                                    y2={48.44555433772325}
-                                    stroke="#94a3b8"
-                                    strokeWidth="1"
-                                  >
-                                  ...
-                                  ...
-                                ...
-                    <Card className="shadow-lg ...">
-                      <div data-slot="card" className="bg-card te...">
-                        <CardHeader className="pb-4">
-                          <div data-slot="card-header" className="@container...">
-                            <CardTitle className="text-cente...">
-                              <div data-slot="card-title" className="font-semib...">
-                                <span
-+                                 className="flex items-center justify-center gap-2 text-primary"
--                                 className="text-foreground"
-                                >
-                                  <Eye className="h-5 w-5">
-+                                   <svg
-+                                     ref={null}
-+                                     xmlns="http://www.w3.org/2000/svg"
-+                                     width={24}
-+                                     height={24}
-+                                     viewBox="0 0 24 24"
-+                                     fill="none"
-+                                     stroke="currentColor"
-+                                     strokeWidth={2}
-+                                     strokeLinecap="round"
-+                                     strokeLinejoin="round"
-+                                     className="lucide lucide-eye h-5 w-5"
-+                                   >
--                                   kifkz
-                                  ...
-                        ...
-                    ...
-        ...
-      ...
-
-[07:10:30.111] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[07:10:30.112] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
-[07:10:30.112] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
-[07:10:30.112] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765475373894}
-[07:10:30.112] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765475373894}
-[07:12:51.929] Server  LOG      ✓ Compiled in 199ms
-[07:14:29.513] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[07:14:29.715] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+[00:04:40.577] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:04:40.577] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/TZJKDD","route":"/game/[code]"}
+[00:04:40.577] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/TZJKDD color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/TZJKDD","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765819185104}
+[00:04:44.507] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765819189034}
+[00:04:52.184] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:52.333] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:04:52.333] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:04:52.333] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765819196860}
+[00:06:04.945] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/KZDUYR color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/KZDUYR","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765819269463}
+[00:06:31.450] Browser LOG     Starting game...
+[00:06:31.451] Browser LOG     Theme ID: tous
+[00:06:32.855] Browser LOG     Cards found: 45
+[00:06:38.012] Browser LOG     Current players for start: 2
+[00:06:48.772] Browser LOG     Starting game...
+[00:06:48.772] Browser LOG     Theme ID: tous
+[00:06:50.040] Browser LOG     Cards found: 45
+[00:06:52.910] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:06:53.090] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
 
 - A server/client branch `if (typeof window !== 'undefined')`.
 - Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
@@ -1184,293 +163,55 @@ https://react.dev/link/hydration-mismatch
 
 It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
 
-https://react.dev/link/hydration-mismatch
+%s%s https://react.dev/link/hydration-mismatch 
 
   ...
-    <RedirectErrorBoundary router={{...}}>
-      <InnerLayoutRouter url="/game/YYTS7C" tree={[...]} params={{code:"YYTS7C"}} cacheNode={{lazyData:null, ...}} ...>
-        <SegmentViewNode type="page" pagePath="/Desktop/P...">
-          <SegmentTrieNode>
-          <GamePage>
-            <GameClient initialGameState={{...}}>
-              <GamePlay initialGameState={{...}}>
-                <div className="min-h-scre...">
-                  <div>
-                  <div className="relative m...">
-                    <div>
-                    <Card className="shadow-lg ...">
-                      <div data-slot="card" className="bg-card te...">
-                        <CardContent className="pt-8 pb-6">
-                          <div data-slot="card-content" className="px-6 pt-8 ...">
-                            <WavelengthWheel targetPosition={56} showTarget={false} showZones={false} guessPosition={90} ...>
-                              <div className="w-full mx-..." ref={{current:null}}>
-                                <svg
-                                  viewBox="0 0 400 230"
-+                                 className="w-full h-auto touch-none select-none"
--                                 className="w-full h-auto touch-none select-none cursor-pointer"
-                                  onMouseDown={function handleMouseDown}
-                                  onTouchStart={function handleTouchStart}
-                                >
-                                  <path>
-                                  <path>
-                                  <path>
-                                  <line>
-                                  <line>
-                                  <line>
-                                  <line>
-                                  <line>
-                                  <line>
-                                  <line
-                                    x1={114.99999999999996}
-+                                   y1={52.775681356645464}
--                                   y1="52.775681356645435"
-                                    x2={112.49999999999996}
-                                    y2={48.44555433772325}
-                                    stroke="#94a3b8"
-                                    strokeWidth="1"
-                                  >
-                                  ...
-                                  ...
-                                ...
-                    <Card className="shadow-lg ...">
-                      <div data-slot="card" className="bg-card te...">
-                        <CardHeader className="pb-4">
-                          <div data-slot="card-header" className="@container...">
-                            <CardTitle className="text-cente...">
-                              <div data-slot="card-title" className="font-semib...">
-                                <span
-+                                 className="flex items-center justify-center gap-2 text-primary"
--                                 className="text-foreground"
-                                >
-                                  <Eye className="h-5 w-5">
-+                                   <svg
-+                                     ref={null}
-+                                     xmlns="http://www.w3.org/2000/svg"
-+                                     width={24}
-+                                     height={24}
-+                                     viewBox="0 0 24 24"
-+                                     fill="none"
-+                                     stroke="currentColor"
-+                                     strokeWidth={2}
-+                                     strokeLinecap="round"
-+                                     strokeLinejoin="round"
-+                                     className="lucide lucide-eye h-5 w-5"
-+                                   >
--                                   kifkz
-                                  ...
-                        ...
-                    ...
-        ...
-      ...
+    <SegmentViewNode type="page" pagePath="/Desktop/P...">
+      <SegmentTrieNode>
+      <GamePage>
+        <GameClient initialGameState={{...}}>
+          <GamePlay initialGameState={{...}}>
+            <div className="min-h-scre...">
+              <div>
+              <div className="relative m...">
+                <div>
+                <Card className="shadow-lg ...">
+                  <div data-slot="card" className="bg-card te...">
+                    <CardContent className="pt-8 pb-6">
+                      <div data-slot="card-content" className="px-6 pt-8 ...">
+                        <WavelengthWheel targetPosition={40} showTarget={undefined} showZones={undefined} ...>
+                          <div className="w-full mx-..." ref={{current:null}}>
+                            <svg viewBox="0 0 400 230" className="w-full h-a..." onMouseDown={function handleMouseDown} ...>
+                              <path>
+                              <path>
+                              <path>
+                              <line>
+                              <line>
+                              <line>
+                              <line>
+                              <line>
+                              <line>
+                              <line
+                                x1={114.99999999999996}
++                               y1={52.775681356645464}
+-                               y1="52.775681356645435"
+                                x2={112.49999999999996}
+                                y2={48.44555433772325}
+                                stroke="#94a3b8"
+                                strokeWidth="1"
+                              >
+                              ...
+                              ...
+                            ...
+                ...
+    ...
 
-[07:14:29.715] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[07:14:29.715] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
-[07:14:29.715] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
-[07:14:29.715] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765475613492}
-[07:14:29.715] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765475613492}
-[07:14:49.805] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[07:14:49.941] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+[00:06:53.090] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:06:53.090] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/KZDUYR","route":"/game/[code]"}
+[00:06:53.090] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/KZDUYR color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/KZDUYR","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765819317620}
+[00:09:31.100] Server  LOG      ✓ Compiled in 103ms
+[00:09:35.142] Server  LOG      ✓ Compiled in 85ms
+[00:09:35.278] Browser ERROR   The final argument passed to %s changed size between renders. The order and size of this array must remain constant.
 
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-https://react.dev/link/hydration-mismatch
-
-  ...
-    <RedirectErrorBoundary router={{...}}>
-      <InnerLayoutRouter url="/game/YYTS7C" tree={[...]} params={{code:"YYTS7C"}} cacheNode={{lazyData:null, ...}} ...>
-        <SegmentViewNode type="page" pagePath="/Desktop/P...">
-          <SegmentTrieNode>
-          <GamePage>
-            <GameClient initialGameState={{...}}>
-              <GamePlay initialGameState={{...}}>
-                <div className="min-h-scre...">
-                  <div>
-                  <div className="relative m...">
-                    <div>
-                    <Card className="shadow-lg ...">
-                      <div data-slot="card" className="bg-card te...">
-                        <CardContent className="pt-8 pb-6">
-                          <div data-slot="card-content" className="px-6 pt-8 ...">
-                            <WavelengthWheel targetPosition={56} showTarget={false} showZones={false} guessPosition={90} ...>
-                              <div className="w-full mx-..." ref={{current:null}}>
-                                <svg
-                                  viewBox="0 0 400 230"
-+                                 className="w-full h-auto touch-none select-none"
--                                 className="w-full h-auto touch-none select-none cursor-pointer"
-                                  onMouseDown={function handleMouseDown}
-                                  onTouchStart={function handleTouchStart}
-                                >
-                                  <path>
-                                  <path>
-                                  <path>
-                                  <line>
-                                  <line>
-                                  <line>
-                                  <line>
-                                  <line>
-                                  <line>
-                                  <line
-                                    x1={114.99999999999996}
-+                                   y1={52.775681356645464}
--                                   y1="52.775681356645435"
-                                    x2={112.49999999999996}
-                                    y2={48.44555433772325}
-                                    stroke="#94a3b8"
-                                    strokeWidth="1"
-                                  >
-                                  ...
-                                  ...
-                                ...
-                    <Card className="shadow-lg ...">
-                      <div data-slot="card" className="bg-card te...">
-                        <CardHeader className="pb-4">
-                          <div data-slot="card-header" className="@container...">
-                            <CardTitle className="text-cente...">
-                              <div data-slot="card-title" className="font-semib...">
-                                <span
-+                                 className="flex items-center justify-center gap-2 text-primary"
--                                 className="text-foreground"
-                                >
-                                  <Eye className="h-5 w-5">
-+                                   <svg
-+                                     ref={null}
-+                                     xmlns="http://www.w3.org/2000/svg"
-+                                     width={24}
-+                                     height={24}
-+                                     viewBox="0 0 24 24"
-+                                     fill="none"
-+                                     stroke="currentColor"
-+                                     strokeWidth={2}
-+                                     strokeLinecap="round"
-+                                     strokeLinejoin="round"
-+                                     className="lucide lucide-eye h-5 w-5"
-+                                   >
--                                   kifkz
-                                  ...
-                        ...
-                    ...
-        ...
-      ...
-
-[07:14:49.941] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[07:14:49.941] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
-[07:14:49.941] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
-[07:14:49.941] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765475633716}
-[07:14:49.941] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765475633716}
-[07:15:03.227] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[07:15:03.362] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
-
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-https://react.dev/link/hydration-mismatch
-
-  ...
-    <RedirectErrorBoundary router={{...}}>
-      <InnerLayoutRouter url="/game/YYTS7C" tree={[...]} params={{code:"YYTS7C"}} cacheNode={{lazyData:null, ...}} ...>
-        <SegmentViewNode type="page" pagePath="/Desktop/P...">
-          <SegmentTrieNode>
-          <GamePage>
-            <GameClient initialGameState={{...}}>
-              <GamePlay initialGameState={{...}}>
-                <div className="min-h-scre...">
-                  <div>
-                  <div className="relative m...">
-                    <div>
-                    <Card className="shadow-lg ...">
-                      <div data-slot="card" className="bg-card te...">
-                        <CardContent className="pt-8 pb-6">
-                          <div data-slot="card-content" className="px-6 pt-8 ...">
-                            <WavelengthWheel targetPosition={56} showTarget={false} showZones={false} guessPosition={90} ...>
-                              <div className="w-full mx-..." ref={{current:null}}>
-                                <svg
-                                  viewBox="0 0 400 230"
-+                                 className="w-full h-auto touch-none select-none"
--                                 className="w-full h-auto touch-none select-none cursor-pointer"
-                                  onMouseDown={function handleMouseDown}
-                                  onTouchStart={function handleTouchStart}
-                                >
-                                  <path>
-                                  <path>
-                                  <path>
-                                  <line>
-                                  <line>
-                                  <line>
-                                  <line>
-                                  <line>
-                                  <line>
-                                  <line
-                                    x1={114.99999999999996}
-+                                   y1={52.775681356645464}
--                                   y1="52.775681356645435"
-                                    x2={112.49999999999996}
-                                    y2={48.44555433772325}
-                                    stroke="#94a3b8"
-                                    strokeWidth="1"
-                                  >
-                                  ...
-                                  ...
-                                ...
-                    <Card className="shadow-lg ...">
-                      <div data-slot="card" className="bg-card te...">
-                        <CardHeader className="pb-4">
-                          <div data-slot="card-header" className="@container...">
-                            <CardTitle className="text-cente...">
-                              <div data-slot="card-title" className="font-semib...">
-                                <span
-+                                 className="flex items-center justify-center gap-2 text-primary"
--                                 className="text-foreground"
-                                >
-                                  <Eye className="h-5 w-5">
-+                                   <svg
-+                                     ref={null}
-+                                     xmlns="http://www.w3.org/2000/svg"
-+                                     width={24}
-+                                     height={24}
-+                                     viewBox="0 0 24 24"
-+                                     fill="none"
-+                                     stroke="currentColor"
-+                                     strokeWidth={2}
-+                                     strokeLinecap="round"
-+                                     strokeLinejoin="round"
-+                                     className="lucide lucide-eye h-5 w-5"
-+                                   >
--                                   kifkz
-                                  ...
-                        ...
-                    ...
-        ...
-      ...
-
-[07:15:03.362] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[07:15:03.362] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
-[07:15:03.362] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/game/YYTS7C","route":"/game/[code]"}
-[07:15:03.362] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765475647137}
-[07:15:03.362] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/game/YYTS7C color: rgb(120, 120, 120) color: inherit {"dp":"/game/[code]","o":"http://localhost:3000/game/YYTS7C","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765475647137}
-[07:16:04.215] Server  LOG      ✓ Compiled in 117ms
-[07:16:27.789] Server  LOG      ✓ Compiled in 58ms
-[21:23:43.904] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765526567215}
-[21:27:38.527] Server  LOG      ✓ Compiled in 309ms
-[21:27:54.233] Server  LOG      ✓ Compiled in 273ms
-[21:28:27.492] Server  LOG      ✓ Compiled in 139ms
-[21:28:29.350] Server  LOG      ✓ Compiled in 36ms
-[21:28:31.208] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[21:28:31.391] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[21:28:31.391] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[21:28:31.391] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765526854703}
-[21:28:33.882] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[21:28:34.004] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[21:28:34.004] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[21:28:34.004] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765526857316}
-[21:29:00.810] Server  LOG      ✓ Compiled in 93ms
+Previous: %s
+Incoming: %s useEffect [ef4f21f6-792b-4d00-84d6-6d54121e16bf, [object Object], session_1765469986922_v1m9bs23u, [object Object]] [ef4f21f6-792b-4d00-84d6-6d54121e16bf, [object Object], session_1765469986922_v1m9bs23u, [object Object], 30741d24-6589-4d95-8748-c6c638d7169f, , [object Object]]

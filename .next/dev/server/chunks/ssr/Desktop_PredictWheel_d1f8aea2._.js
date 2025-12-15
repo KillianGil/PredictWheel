@@ -928,6 +928,16 @@ const LOCAL_THEMES = [
         description: "Chansons, artistes, genres"
     },
     {
+        id: "random",
+        name: "Aléatoire",
+        description: "Cartes de tous les thèmes mélangés"
+    },
+    {
+        id: "custom",
+        name: "Personnalisé",
+        description: "Écrivez vos propres extrêmes"
+    },
+    {
         id: "nourriture",
         name: "Nourriture",
         description: "Tout ce qui se mange"
@@ -936,11 +946,6 @@ const LOCAL_THEMES = [
         id: "cinema",
         name: "Cinéma",
         description: "Films, séries, réalisateurs"
-    },
-    {
-        id: "tous",
-        name: "Tous",
-        description: "Toutes les catégories"
     }
 ];
 function getRandomCard(theme, usedCards = []) {
@@ -2583,6 +2588,32 @@ function GameClient({ initialGameState }) {
         const isInGame = gameState.players.some((p)=>p.session_id === sessionId);
         if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
         ;
+        // Fonction de rafraîchissement
+        const fetchLatestState = async ()=>{
+            const { data: latestGame } = await supabase.from("games").select("*").eq("id", gameState.game.id).single();
+            if (latestGame) {
+                let currentCard = gameState.currentCard;
+                let theme = gameState.theme;
+                if (latestGame.current_card_id && latestGame.current_card_id !== gameState.currentCard?.id) {
+                    const { data } = await supabase.from("cards").select("*").eq("id", latestGame.current_card_id).single();
+                    if (data) currentCard = data;
+                }
+                if (latestGame.theme_id && latestGame.theme_id !== gameState.theme?.id) {
+                    const { data } = await supabase.from("themes").select("*").eq("id", latestGame.theme_id).single();
+                    if (data) theme = data;
+                }
+                // Only update if something changed to avoid render loops (simple equality check on updated_at could correspond)
+                // Here we just set state, React handles diffing usually, but for complex objects:
+                if (JSON.stringify(latestGame) !== JSON.stringify(gameState.game)) {
+                    setGameState((prev)=>({
+                            ...prev,
+                            game: latestGame,
+                            currentCard,
+                            theme
+                        }));
+                }
+            }
+        };
         // S'abonner aux changements de la partie
         const channel = supabase.channel(`game-state-${gameState.game.id}`).on("postgres_changes", {
             event: "UPDATE",
@@ -2608,23 +2639,30 @@ function GameClient({ initialGameState }) {
                     theme
                 }));
         }).subscribe();
+        // Polling fallback to ensure state is fresh even if websockets fail
+        const interval = setInterval(fetchLatestState, 2000);
         return ()=>{
             supabase.removeChannel(channel);
+            clearInterval(interval);
         };
     }, [
         gameState.game.id,
         supabase,
         sessionId,
-        router
+        router,
+        gameState.currentCard?.id,
+        gameState.theme?.id,
+        gameState.game
     ]);
     const handleStartGame = async ()=>{
         console.log("Starting game...");
         // Get the selected theme from the game state
         const themeId = gameState.theme?.id || "tous";
         console.log("Theme ID:", themeId);
-        // Fetch cards - if "tous", get all cards, otherwise filter by theme
+        // Fetch cards - if "tous" or random/custom (handled as logic in lobby?), get all or filter
+        // Note: if "tous" was removed from UI but code sends "tous" as fallback, we usually treat it as all.
         let cards;
-        if (themeId === "tous") {
+        if (themeId === "tous" || themeId === "random") {
             // @ts-ignore
             const { data } = await supabase.from("cards").select("*");
             cards = data;
@@ -2636,14 +2674,22 @@ function GameClient({ initialGameState }) {
         console.log("Cards found:", cards?.length || 0);
         if (!cards || cards.length === 0) {
             console.error("No cards found for theme:", themeId);
-            alert("Erreur: Aucune carte trouvée. Veuillez patienter quelques secondes pendant la synchronisation puis réessayer.");
+            // alert("Erreur: Aucune carte trouvée...") // Removed alert
             return;
         }
         const randomCard = cards[Math.floor(Math.random() * cards.length)];
         const targetPosition = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$lib$2f$game$2d$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["generateTargetPosition"])();
         // Récupérer la liste à jour des joueurs
-        const { data: currentPlayers } = await supabase.from("game_players").select("*").eq("game_id", gameState.game.id);
-        if (!currentPlayers || currentPlayers.length < 2) return;
+        const { data: currentPlayers, error: playersError } = await supabase.from("game_players").select("*").eq("game_id", gameState.game.id);
+        if (playersError) {
+            console.error("Error fetching players:", playersError);
+            return;
+        }
+        console.log("Current players for start:", currentPlayers?.length);
+        if (!currentPlayers || currentPlayers.length < 2) {
+            // alert("Il faut au moins 2 joueurs...") // Removed alert for cleaner UX (or could use toast)
+            return;
+        }
         const randomPsychic = currentPlayers[Math.floor(Math.random() * currentPlayers.length)];
         // Mettre à jour les joueurs
         for (const player of currentPlayers){
@@ -2655,13 +2701,16 @@ function GameClient({ initialGameState }) {
         }
         // Démarrer la partie
         // @ts-ignore
-        await supabase.from("games").update({
+        const { error: updateError } = await supabase.from("games").update({
             status: "playing",
             current_round: 1,
             current_card_id: randomCard.id,
             target_position: targetPosition,
             current_clue: null
         }).eq("id", gameState.game.id);
+        if (updateError) {
+            console.error("Failed to start game", updateError);
+        }
     };
     if (gameState.game.status === "waiting") {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$game$2d$lobby$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["GameLobby"], {
@@ -2669,7 +2718,7 @@ function GameClient({ initialGameState }) {
             onStartGame: handleStartGame
         }, void 0, false, {
             fileName: "[project]/Desktop/PredictWheel/app/game/[code]/game-client.tsx",
-            lineNumber: 135,
+            lineNumber: 189,
             columnNumber: 12
         }, this);
     }
@@ -2677,7 +2726,7 @@ function GameClient({ initialGameState }) {
         initialGameState: gameState
     }, void 0, false, {
         fileName: "[project]/Desktop/PredictWheel/app/game/[code]/game-client.tsx",
-        lineNumber: 138,
+        lineNumber: 192,
         columnNumber: 10
     }, this);
 }

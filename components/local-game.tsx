@@ -21,7 +21,7 @@ export function LocalGame({ onBack }: LocalGameProps) {
     players: [],
     currentRound: 1,
     maxRounds: 5,
-    theme: "tous",
+    theme: "random",
     currentCard: null,
     targetPosition: null,
     currentClue: null,
@@ -36,6 +36,8 @@ export function LocalGame({ onBack }: LocalGameProps) {
   const [currentGuesserIndex, setCurrentGuesserIndex] = useState(0)
   const [showTarget, setShowTarget] = useState(false)
   const [showQuitConfirm, setShowQuitConfirm] = useState(false)
+  const [customLeftExtreme, setCustomLeftExtreme] = useState("")
+  const [customRightExtreme, setCustomRightExtreme] = useState("")
 
   const currentPsychic = gameState.players[gameState.currentPsychicIndex]
   const guessers = gameState.players.filter((_, i) => i !== gameState.currentPsychicIndex)
@@ -56,6 +58,18 @@ export function LocalGame({ onBack }: LocalGameProps) {
   }
 
   const startGame = () => {
+    if (gameState.theme === "custom") {
+      setCustomLeftExtreme("")
+      setCustomRightExtreme("")
+      setGameState((prev) => ({
+        ...prev,
+        phase: "setup-card",
+        currentRound: 1,
+        guesses: [],
+      }))
+      return
+    }
+
     const card = getRandomCard(gameState.theme, gameState.usedCards || [])
     const target = generateTargetPosition()
     setGameState((prev) => ({
@@ -128,9 +142,25 @@ export function LocalGame({ onBack }: LocalGameProps) {
       setGameState((prev) => ({ ...prev, phase: "finished" }))
       return
     }
+
+    const nextPsychicIndex = (gameState.currentPsychicIndex + 1) % gameState.players.length
+
+    if (gameState.theme === "custom") {
+      setCustomLeftExtreme("")
+      setCustomRightExtreme("")
+      setGameState((prev) => ({
+        ...prev,
+        currentPsychicIndex: nextPsychicIndex,
+        currentRound: prev.currentRound + 1,
+        phase: "setup-card",
+        guesses: [],
+        currentClue: null,
+      }))
+      return
+    }
+
     const card = getRandomCard(gameState.theme, gameState.usedCards || [])
     const target = generateTargetPosition()
-    const nextPsychicIndex = (gameState.currentPsychicIndex + 1) % gameState.players.length
     setGameState((prev) => ({
       ...prev,
       usedCards: [...(prev.usedCards || []), { leftExtreme: card.leftExtreme, rightExtreme: card.rightExtreme }],
@@ -196,6 +226,69 @@ export function LocalGame({ onBack }: LocalGameProps) {
       </div>
     </div>
   )
+
+  const handleCustomCardSubmit = () => {
+    if (!customLeftExtreme.trim() || !customRightExtreme.trim()) return
+
+    const target = generateTargetPosition()
+    setGameState((prev) => ({
+      ...prev,
+      currentCard: { leftExtreme: customLeftExtreme, rightExtreme: customRightExtreme },
+      targetPosition: target,
+      phase: "psychic-view",
+    }))
+  }
+
+  // Phase: Setup Card (Custom Mode)
+  if (gameState.phase === "setup-card") {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-violet-100 p-4">
+        {showQuitConfirm && <QuitConfirmModal />}
+        <div className="max-w-md md:max-w-xl mx-auto space-y-6">
+          <GameHeader />
+
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-indigo-600 mb-2">{currentPsychic?.name}, c'est à toi !</h2>
+            <p className="text-slate-500">Choisis les deux extrêmes de l'échelle</p>
+          </div>
+
+          <div className="bg-white/70 backdrop-blur-sm border border-slate-200 rounded-2xl p-6 space-y-6 shadow-sm">
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-slate-700">Extrême Gauche (0%)</label>
+              <Input
+                placeholder="Ex: Chaud"
+                value={customLeftExtreme}
+                onChange={(e) => setCustomLeftExtreme(e.target.value)}
+                className="h-12 bg-white"
+              />
+            </div>
+
+            <div className="flex justify-center">
+              <ArrowRight className="text-slate-300" />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-slate-700">Extrême Droite (100%)</label>
+              <Input
+                placeholder="Ex: Froid"
+                value={customRightExtreme}
+                onChange={(e) => setCustomRightExtreme(e.target.value)}
+                className="h-12 bg-white"
+              />
+            </div>
+
+            <Button
+              className="w-full h-14 text-lg rounded-2xl bg-indigo-500 hover:bg-indigo-600 mt-4"
+              onClick={handleCustomCardSubmit}
+              disabled={!customLeftExtreme.trim() || !customRightExtreme.trim()}
+            >
+              Valider le thème
+            </Button>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   // Phase Setup
   if (gameState.phase === "setup") {
@@ -268,8 +361,10 @@ export function LocalGame({ onBack }: LocalGameProps) {
           {/* Thème */}
           <div className="bg-white/70 backdrop-blur-sm border border-slate-200 rounded-2xl p-5 space-y-4 shadow-sm">
             <h2 className="font-semibold text-slate-700">Thème</h2>
+
+            {/* Standard Themes */}
             <div className="grid grid-cols-3 gap-2">
-              {LOCAL_THEMES.map((theme) => (
+              {LOCAL_THEMES.filter(t => t.id !== "custom" && t.id !== "random").map((theme) => (
                 <button
                   key={theme.id}
                   onClick={() => setGameState((prev) => ({ ...prev, theme: theme.id }))}
@@ -287,6 +382,49 @@ export function LocalGame({ onBack }: LocalGameProps) {
                       gameState.theme === theme.id ? "text-indigo-100" : "text-slate-500",
                     )}
                   >
+                    {theme.description}
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            {/* Special Themes */}
+            <div className="grid grid-cols-2 gap-2 mt-2">
+              {LOCAL_THEMES.filter(t => t.id === "random").map((theme) => (
+                <button
+                  key={theme.id}
+                  onClick={() => setGameState((prev) => ({ ...prev, theme: theme.id }))}
+                  className={cn(
+                    "p-3 rounded-xl text-left transition-all border-2 border-dashed",
+                    gameState.theme === theme.id
+                      ? "bg-violet-500 border-violet-500 text-white shadow-md"
+                      : "bg-violet-50 border-violet-200 hover:bg-violet-100 text-violet-700",
+                  )}
+                >
+                  <div className="font-medium text-sm flex items-center gap-2">
+                    <span className="text-lg">🎲</span> {theme.name}
+                  </div>
+                  <div className={cn("text-xs mt-0.5", gameState.theme === theme.id ? "text-violet-100" : "text-violet-500")}>
+                    {theme.description}
+                  </div>
+                </button>
+              ))}
+
+              {LOCAL_THEMES.filter(t => t.id === "custom").map((theme) => (
+                <button
+                  key={theme.id}
+                  onClick={() => setGameState((prev) => ({ ...prev, theme: theme.id }))}
+                  className={cn(
+                    "p-3 rounded-xl text-left transition-all border-2 border-dashed",
+                    gameState.theme === theme.id
+                      ? "bg-amber-500 border-amber-500 text-white shadow-md"
+                      : "bg-amber-50 border-amber-200 hover:bg-amber-100 text-amber-700",
+                  )}
+                >
+                  <div className="font-medium text-sm flex items-center gap-2">
+                    <span className="text-lg">✨</span> {theme.name}
+                  </div>
+                  <div className={cn("text-xs mt-0.5", gameState.theme === theme.id ? "text-amber-100" : "text-amber-700")}>
                     {theme.description}
                   </div>
                 </button>

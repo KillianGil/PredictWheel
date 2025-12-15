@@ -151,9 +151,18 @@ export const LOCAL_THEMES = [
   { id: "sport", name: "Sport", description: "Foot, tennis & cie" },
   { id: "jeuvideo", name: "Jeu vidéo", description: "Titres, consoles, persos" },
   { id: "musique", name: "Musique", description: "Chansons, artistes, genres" },
+  {
+    id: "random",
+    name: "Aléatoire",
+    description: "Cartes de tous les thèmes mélangés",
+  },
+  {
+    id: "custom",
+    name: "Personnalisé",
+    description: "Écrivez vos propres extrêmes",
+  },
   { id: "nourriture", name: "Nourriture", description: "Tout ce qui se mange" },
   { id: "cinema", name: "Cinéma", description: "Films, séries, réalisateurs" },
-  { id: "tous", name: "Tous", description: "Toutes les catégories" },
 ]
 
 export function getRandomCard(theme: string, usedCards: { leftExtreme: string; rightExtreme: string }[] = []): LocalCard {

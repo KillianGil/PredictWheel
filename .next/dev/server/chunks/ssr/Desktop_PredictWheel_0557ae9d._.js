@@ -1181,6 +1181,16 @@ const LOCAL_THEMES = [
         description: "Chansons, artistes, genres"
     },
     {
+        id: "random",
+        name: "Aléatoire",
+        description: "Cartes de tous les thèmes mélangés"
+    },
+    {
+        id: "custom",
+        name: "Personnalisé",
+        description: "Écrivez vos propres extrêmes"
+    },
+    {
         id: "nourriture",
         name: "Nourriture",
         description: "Tout ce qui se mange"
@@ -1189,11 +1199,6 @@ const LOCAL_THEMES = [
         id: "cinema",
         name: "Cinéma",
         description: "Films, séries, réalisateurs"
-    },
-    {
-        id: "tous",
-        name: "Tous",
-        description: "Toutes les catégories"
     }
 ];
 function getRandomCard(theme, usedCards = []) {
@@ -1249,7 +1254,7 @@ function LocalGame({ onBack }) {
         players: [],
         currentRound: 1,
         maxRounds: 5,
-        theme: "tous",
+        theme: "random",
         currentCard: null,
         targetPosition: null,
         currentClue: null,
@@ -1264,6 +1269,8 @@ function LocalGame({ onBack }) {
     const [currentGuesserIndex, setCurrentGuesserIndex] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
     const [showTarget, setShowTarget] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [showQuitConfirm, setShowQuitConfirm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [customLeftExtreme, setCustomLeftExtreme] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
+    const [customRightExtreme, setCustomRightExtreme] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
     const currentPsychic = gameState.players[gameState.currentPsychicIndex];
     const guessers = gameState.players.filter((_, i)=>i !== gameState.currentPsychicIndex);
     const addPlayer = ()=>{
@@ -1289,6 +1296,17 @@ function LocalGame({ onBack }) {
             }));
     };
     const startGame = ()=>{
+        if (gameState.theme === "custom") {
+            setCustomLeftExtreme("");
+            setCustomRightExtreme("");
+            setGameState((prev)=>({
+                    ...prev,
+                    phase: "setup-card",
+                    currentRound: 1,
+                    guesses: []
+                }));
+            return;
+        }
         const card = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$lib$2f$local$2d$cards$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getRandomCard"])(gameState.theme, gameState.usedCards || []);
         const target = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$lib$2f$game$2d$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["generateTargetPosition"])();
         setGameState((prev)=>({
@@ -1395,9 +1413,22 @@ function LocalGame({ onBack }) {
                 }));
             return;
         }
+        const nextPsychicIndex = (gameState.currentPsychicIndex + 1) % gameState.players.length;
+        if (gameState.theme === "custom") {
+            setCustomLeftExtreme("");
+            setCustomRightExtreme("");
+            setGameState((prev)=>({
+                    ...prev,
+                    currentPsychicIndex: nextPsychicIndex,
+                    currentRound: prev.currentRound + 1,
+                    phase: "setup-card",
+                    guesses: [],
+                    currentClue: null
+                }));
+            return;
+        }
         const card = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$lib$2f$local$2d$cards$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getRandomCard"])(gameState.theme, gameState.usedCards || []);
         const target = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$lib$2f$game$2d$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["generateTargetPosition"])();
-        const nextPsychicIndex = (gameState.currentPsychicIndex + 1) % gameState.players.length;
         setGameState((prev)=>({
                 ...prev,
                 usedCards: [
@@ -1450,7 +1481,7 @@ function LocalGame({ onBack }) {
                             className: "h-5 w-5"
                         }, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                            lineNumber: 171,
+                            lineNumber: 201,
                             columnNumber: 9
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1458,13 +1489,13 @@ function LocalGame({ onBack }) {
                             children: "Quitter"
                         }, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                            lineNumber: 172,
+                            lineNumber: 202,
                             columnNumber: 9
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                    lineNumber: 167,
+                    lineNumber: 197,
                     columnNumber: 7
                 }, this),
                 showRound && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1476,13 +1507,13 @@ function LocalGame({ onBack }) {
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                    lineNumber: 175,
+                    lineNumber: 205,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-            lineNumber: 166,
+            lineNumber: 196,
             columnNumber: 5
         }, this);
     // Quit confirmation modal
@@ -1496,7 +1527,7 @@ function LocalGame({ onBack }) {
                         children: "Quitter la partie ?"
                     }, void 0, false, {
                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                        lineNumber: 186,
+                        lineNumber: 216,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1504,7 +1535,7 @@ function LocalGame({ onBack }) {
                         children: "La progression sera perdue."
                     }, void 0, false, {
                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                        lineNumber: 187,
+                        lineNumber: 217,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1517,7 +1548,7 @@ function LocalGame({ onBack }) {
                                 children: "Annuler"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 189,
+                                lineNumber: 219,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -1527,26 +1558,185 @@ function LocalGame({ onBack }) {
                                 children: "Quitter"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 192,
+                                lineNumber: 222,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                        lineNumber: 188,
+                        lineNumber: 218,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                lineNumber: 185,
+                lineNumber: 215,
                 columnNumber: 7
             }, this)
         }, void 0, false, {
             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-            lineNumber: 184,
+            lineNumber: 214,
             columnNumber: 5
         }, this);
+    const handleCustomCardSubmit = ()=>{
+        if (!customLeftExtreme.trim() || !customRightExtreme.trim()) return;
+        const target = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$lib$2f$game$2d$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["generateTargetPosition"])();
+        setGameState((prev)=>({
+                ...prev,
+                currentCard: {
+                    leftExtreme: customLeftExtreme,
+                    rightExtreme: customRightExtreme
+                },
+                targetPosition: target,
+                phase: "psychic-view"
+            }));
+    };
+    // Phase: Setup Card (Custom Mode)
+    if (gameState.phase === "setup-card") {
+        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-violet-100 p-4",
+            children: [
+                showQuitConfirm && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(QuitConfirmModal, {}, void 0, false, {
+                    fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                    lineNumber: 246,
+                    columnNumber: 29
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "max-w-md md:max-w-xl mx-auto space-y-6",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(GameHeader, {}, void 0, false, {
+                            fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                            lineNumber: 248,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "text-center",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                    className: "text-2xl font-bold text-indigo-600 mb-2",
+                                    children: [
+                                        currentPsychic?.name,
+                                        ", c'est à toi !"
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                    lineNumber: 251,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "text-slate-500",
+                                    children: "Choisis les deux extrêmes de l'échelle"
+                                }, void 0, false, {
+                                    fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                    lineNumber: 252,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                            lineNumber: 250,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "bg-white/70 backdrop-blur-sm border border-slate-200 rounded-2xl p-6 space-y-6 shadow-sm",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "space-y-2",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                            className: "text-sm font-medium text-slate-700",
+                                            children: "Extrême Gauche (0%)"
+                                        }, void 0, false, {
+                                            fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                            lineNumber: 257,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
+                                            placeholder: "Ex: Chaud",
+                                            value: customLeftExtreme,
+                                            onChange: (e)=>setCustomLeftExtreme(e.target.value),
+                                            className: "h-12 bg-white"
+                                        }, void 0, false, {
+                                            fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                            lineNumber: 258,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                    lineNumber: 256,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "flex justify-center",
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$right$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ArrowRight$3e$__["ArrowRight"], {
+                                        className: "text-slate-300"
+                                    }, void 0, false, {
+                                        fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                        lineNumber: 267,
+                                        columnNumber: 15
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                    lineNumber: 266,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "space-y-2",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                            className: "text-sm font-medium text-slate-700",
+                                            children: "Extrême Droite (100%)"
+                                        }, void 0, false, {
+                                            fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                            lineNumber: 271,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
+                                            placeholder: "Ex: Froid",
+                                            value: customRightExtreme,
+                                            onChange: (e)=>setCustomRightExtreme(e.target.value),
+                                            className: "h-12 bg-white"
+                                        }, void 0, false, {
+                                            fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                            lineNumber: 272,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                    lineNumber: 270,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
+                                    className: "w-full h-14 text-lg rounded-2xl bg-indigo-500 hover:bg-indigo-600 mt-4",
+                                    onClick: handleCustomCardSubmit,
+                                    disabled: !customLeftExtreme.trim() || !customRightExtreme.trim(),
+                                    children: "Valider le thème"
+                                }, void 0, false, {
+                                    fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                    lineNumber: 280,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                            lineNumber: 255,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                    lineNumber: 247,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+            lineNumber: 245,
+            columnNumber: 7
+        }, this);
+    }
     // Phase Setup
     if (gameState.phase === "setup") {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1562,20 +1752,20 @@ function LocalGame({ onBack }) {
                                 className: "h-5 w-5"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 209,
+                                lineNumber: 302,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 children: "Retour"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 210,
+                                lineNumber: 303,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                        lineNumber: 205,
+                        lineNumber: 298,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1586,7 +1776,7 @@ function LocalGame({ onBack }) {
                                 children: "Mode Local"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 214,
+                                lineNumber: 307,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1594,13 +1784,13 @@ function LocalGame({ onBack }) {
                                 children: "Passez-vous le téléphone"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 215,
+                                lineNumber: 308,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                        lineNumber: 213,
+                        lineNumber: 306,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1616,14 +1806,14 @@ function LocalGame({ onBack }) {
                                                 className: "h-5 w-5"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                lineNumber: 222,
+                                                lineNumber: 315,
                                                 columnNumber: 17
                                             }, this),
                                             "Joueurs"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 221,
+                                        lineNumber: 314,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1634,13 +1824,13 @@ function LocalGame({ onBack }) {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 225,
+                                        lineNumber: 318,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 220,
+                                lineNumber: 313,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1655,7 +1845,7 @@ function LocalGame({ onBack }) {
                                         className: "h-12 bg-white border-slate-200"
                                     }, void 0, false, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 229,
+                                        lineNumber: 322,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -1666,18 +1856,18 @@ function LocalGame({ onBack }) {
                                             className: "h-5 w-5"
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                            lineNumber: 238,
+                                            lineNumber: 331,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 237,
+                                        lineNumber: 330,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 228,
+                                lineNumber: 321,
                                 columnNumber: 13
                             }, this),
                             gameState.players.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1693,7 +1883,7 @@ function LocalGame({ onBack }) {
                                                         children: index + 1
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                        lineNumber: 247,
+                                                        lineNumber: 340,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1701,13 +1891,13 @@ function LocalGame({ onBack }) {
                                                         children: player.name
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                        lineNumber: 250,
+                                                        lineNumber: 343,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                lineNumber: 246,
+                                                lineNumber: 339,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1717,23 +1907,23 @@ function LocalGame({ onBack }) {
                                                     className: "h-4 w-4"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                    lineNumber: 256,
+                                                    lineNumber: 349,
                                                     columnNumber: 23
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                lineNumber: 252,
+                                                lineNumber: 345,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, player.id, true, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 245,
+                                        lineNumber: 338,
                                         columnNumber: 19
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 243,
+                                lineNumber: 336,
                                 columnNumber: 15
                             }, this),
                             gameState.players.length < 2 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1741,13 +1931,13 @@ function LocalGame({ onBack }) {
                                 children: "Ajoutez au moins 2 joueurs"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 264,
+                                lineNumber: 357,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                        lineNumber: 219,
+                        lineNumber: 312,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1758,12 +1948,12 @@ function LocalGame({ onBack }) {
                                 children: "Thème"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 270,
+                                lineNumber: 363,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "grid grid-cols-3 gap-2",
-                                children: __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$lib$2f$local$2d$cards$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["LOCAL_THEMES"].map((theme)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                children: __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$lib$2f$local$2d$cards$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["LOCAL_THEMES"].filter((t)=>t.id !== "custom" && t.id !== "random").map((theme)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                         onClick: ()=>setGameState((prev)=>({
                                                     ...prev,
                                                     theme: theme.id
@@ -1775,7 +1965,7 @@ function LocalGame({ onBack }) {
                                                 children: theme.name
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                lineNumber: 283,
+                                                lineNumber: 378,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1783,24 +1973,113 @@ function LocalGame({ onBack }) {
                                                 children: theme.description
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                lineNumber: 284,
+                                                lineNumber: 379,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, theme.id, true, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 273,
+                                        lineNumber: 368,
                                         columnNumber: 17
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 271,
+                                lineNumber: 366,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "grid grid-cols-2 gap-2 mt-2",
+                                children: [
+                                    __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$lib$2f$local$2d$cards$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["LOCAL_THEMES"].filter((t)=>t.id === "random").map((theme)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                            onClick: ()=>setGameState((prev)=>({
+                                                        ...prev,
+                                                        theme: theme.id
+                                                    })),
+                                            className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("p-3 rounded-xl text-left transition-all border-2 border-dashed", gameState.theme === theme.id ? "bg-violet-500 border-violet-500 text-white shadow-md" : "bg-violet-50 border-violet-200 hover:bg-violet-100 text-violet-700"),
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "font-medium text-sm flex items-center gap-2",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            className: "text-lg",
+                                                            children: "🎲"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                                            lineNumber: 405,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        " ",
+                                                        theme.name
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                                    lineNumber: 404,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("text-xs mt-0.5", gameState.theme === theme.id ? "text-violet-100" : "text-violet-500"),
+                                                    children: theme.description
+                                                }, void 0, false, {
+                                                    fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                                    lineNumber: 407,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, theme.id, true, {
+                                            fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                            lineNumber: 394,
+                                            columnNumber: 17
+                                        }, this)),
+                                    __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$lib$2f$local$2d$cards$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["LOCAL_THEMES"].filter((t)=>t.id === "custom").map((theme)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                            onClick: ()=>setGameState((prev)=>({
+                                                        ...prev,
+                                                        theme: theme.id
+                                                    })),
+                                            className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("p-3 rounded-xl text-left transition-all border-2 border-dashed", gameState.theme === theme.id ? "bg-amber-500 border-amber-500 text-white shadow-md" : "bg-amber-50 border-amber-200 hover:bg-amber-100 text-amber-700"),
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "font-medium text-sm flex items-center gap-2",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            className: "text-lg",
+                                                            children: "✨"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                                            lineNumber: 425,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        " ",
+                                                        theme.name
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                                    lineNumber: 424,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("text-xs mt-0.5", gameState.theme === theme.id ? "text-amber-100" : "text-amber-700"),
+                                                    children: theme.description
+                                                }, void 0, false, {
+                                                    fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                                    lineNumber: 427,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, theme.id, true, {
+                                            fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                            lineNumber: 414,
+                                            columnNumber: 17
+                                        }, this))
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
+                                lineNumber: 392,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                        lineNumber: 269,
+                        lineNumber: 362,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1811,7 +2090,7 @@ function LocalGame({ onBack }) {
                                 children: "Nombre de manches"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 299,
+                                lineNumber: 437,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1830,18 +2109,18 @@ function LocalGame({ onBack }) {
                                         children: num
                                     }, num, false, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 302,
+                                        lineNumber: 440,
                                         columnNumber: 17
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 300,
+                                lineNumber: 438,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                        lineNumber: 298,
+                        lineNumber: 436,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -1853,25 +2132,25 @@ function LocalGame({ onBack }) {
                                 className: "h-5 w-5 mr-2"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 323,
+                                lineNumber: 461,
                                 columnNumber: 13
                             }, this),
                             "Commencer"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                        lineNumber: 318,
+                        lineNumber: 456,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                lineNumber: 204,
+                lineNumber: 297,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-            lineNumber: 203,
+            lineNumber: 296,
             columnNumber: 7
         }, this);
     }
@@ -1882,7 +2161,7 @@ function LocalGame({ onBack }) {
             children: [
                 showQuitConfirm && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(QuitConfirmModal, {}, void 0, false, {
                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                    lineNumber: 335,
+                    lineNumber: 473,
                     columnNumber: 29
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1890,7 +2169,7 @@ function LocalGame({ onBack }) {
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(GameHeader, {}, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                            lineNumber: 337,
+                            lineNumber: 475,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1905,7 +2184,7 @@ function LocalGame({ onBack }) {
                                                 children: "Passez le téléphone à"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                lineNumber: 343,
+                                                lineNumber: 481,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -1913,7 +2192,7 @@ function LocalGame({ onBack }) {
                                                 children: currentPsychic?.name
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                lineNumber: 344,
+                                                lineNumber: 482,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1921,13 +2200,13 @@ function LocalGame({ onBack }) {
                                                 children: "C'est ton tour d'être le Médium"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                lineNumber: 345,
+                                                lineNumber: 483,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 342,
+                                        lineNumber: 480,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -1938,7 +2217,7 @@ function LocalGame({ onBack }) {
                                                 className: "h-5 w-5 mr-2"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                lineNumber: 348,
+                                                lineNumber: 486,
                                                 columnNumber: 19
                                             }, this),
                                             "Je suis ",
@@ -1946,7 +2225,7 @@ function LocalGame({ onBack }) {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 347,
+                                        lineNumber: 485,
                                         columnNumber: 17
                                     }, this)
                                 ]
@@ -1961,7 +2240,7 @@ function LocalGame({ onBack }) {
                                         rightExtreme: gameState.currentCard?.rightExtreme || ""
                                     }, void 0, false, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 354,
+                                        lineNumber: 492,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1971,12 +2250,12 @@ function LocalGame({ onBack }) {
                                             children: "Mémorise la position de la cible !"
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                            lineNumber: 364,
+                                            lineNumber: 502,
                                             columnNumber: 19
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 363,
+                                        lineNumber: 501,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -1987,33 +2266,33 @@ function LocalGame({ onBack }) {
                                                 className: "h-5 w-5 mr-2"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                lineNumber: 368,
+                                                lineNumber: 506,
                                                 columnNumber: 19
                                             }, this),
                                             "J'ai mémorisé"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 367,
+                                        lineNumber: 505,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true)
                         }, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                            lineNumber: 339,
+                            lineNumber: 477,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                    lineNumber: 336,
+                    lineNumber: 474,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-            lineNumber: 334,
+            lineNumber: 472,
             columnNumber: 7
         }, this);
     }
@@ -2024,7 +2303,7 @@ function LocalGame({ onBack }) {
             children: [
                 showQuitConfirm && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(QuitConfirmModal, {}, void 0, false, {
                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                    lineNumber: 383,
+                    lineNumber: 521,
                     columnNumber: 29
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2032,7 +2311,7 @@ function LocalGame({ onBack }) {
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(GameHeader, {}, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                            lineNumber: 385,
+                            lineNumber: 523,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$wavelength$2d$wheel$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["WavelengthWheel"], {
@@ -2044,7 +2323,7 @@ function LocalGame({ onBack }) {
                             rightExtreme: gameState.currentCard?.rightExtreme || ""
                         }, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                            lineNumber: 387,
+                            lineNumber: 525,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2060,12 +2339,12 @@ function LocalGame({ onBack }) {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 398,
+                                        lineNumber: 536,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                    lineNumber: 397,
+                                    lineNumber: 535,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2080,7 +2359,7 @@ function LocalGame({ onBack }) {
                                             autoFocus: true
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                            lineNumber: 402,
+                                            lineNumber: 540,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -2092,36 +2371,36 @@ function LocalGame({ onBack }) {
                                                 className: "h-5 w-5"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                lineNumber: 416,
+                                                lineNumber: 554,
                                                 columnNumber: 17
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                            lineNumber: 410,
+                                            lineNumber: 548,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                    lineNumber: 401,
+                                    lineNumber: 539,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                            lineNumber: 396,
+                            lineNumber: 534,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                    lineNumber: 384,
+                    lineNumber: 522,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-            lineNumber: 382,
+            lineNumber: 520,
             columnNumber: 7
         }, this);
     }
@@ -2133,7 +2412,7 @@ function LocalGame({ onBack }) {
             children: [
                 showQuitConfirm && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(QuitConfirmModal, {}, void 0, false, {
                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                    lineNumber: 431,
+                    lineNumber: 569,
                     columnNumber: 29
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2141,7 +2420,7 @@ function LocalGame({ onBack }) {
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(GameHeader, {}, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                            lineNumber: 433,
+                            lineNumber: 571,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2152,7 +2431,7 @@ function LocalGame({ onBack }) {
                                     children: "Passez à"
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                    lineNumber: 436,
+                                    lineNumber: 574,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -2160,13 +2439,13 @@ function LocalGame({ onBack }) {
                                     children: currentGuesser?.name
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                    lineNumber: 437,
+                                    lineNumber: 575,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                            lineNumber: 435,
+                            lineNumber: 573,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2177,7 +2456,7 @@ function LocalGame({ onBack }) {
                                     children: "L'indice :"
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                    lineNumber: 441,
+                                    lineNumber: 579,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2189,13 +2468,13 @@ function LocalGame({ onBack }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                    lineNumber: 442,
+                                    lineNumber: 580,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                            lineNumber: 440,
+                            lineNumber: 578,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$wavelength$2d$wheel$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["WavelengthWheel"], {
@@ -2209,7 +2488,7 @@ function LocalGame({ onBack }) {
                             rightExtreme: gameState.currentCard?.rightExtreme || ""
                         }, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                            lineNumber: 445,
+                            lineNumber: 583,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -2218,7 +2497,7 @@ function LocalGame({ onBack }) {
                             children: "Valider"
                         }, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                            lineNumber: 456,
+                            lineNumber: 594,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2231,19 +2510,19 @@ function LocalGame({ onBack }) {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                            lineNumber: 460,
+                            lineNumber: 598,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                    lineNumber: 432,
+                    lineNumber: 570,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-            lineNumber: 430,
+            lineNumber: 568,
             columnNumber: 7
         }, this);
     }
@@ -2290,7 +2569,7 @@ function LocalGame({ onBack }) {
             children: [
                 showQuitConfirm && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(QuitConfirmModal, {}, void 0, false, {
                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                    lineNumber: 514,
+                    lineNumber: 652,
                     columnNumber: 29
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2298,7 +2577,7 @@ function LocalGame({ onBack }) {
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(GameHeader, {}, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                            lineNumber: 516,
+                            lineNumber: 654,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2309,7 +2588,7 @@ function LocalGame({ onBack }) {
                                     children: "Résultat pour"
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                    lineNumber: 519,
+                                    lineNumber: 657,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -2317,13 +2596,13 @@ function LocalGame({ onBack }) {
                                     children: viewedResult?.player?.name
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                    lineNumber: 520,
+                                    lineNumber: 658,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                            lineNumber: 518,
+                            lineNumber: 656,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$wavelength$2d$wheel$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["WavelengthWheel"], {
@@ -2336,7 +2615,7 @@ function LocalGame({ onBack }) {
                             rightExtreme: gameState.currentCard?.rightExtreme || ""
                         }, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                            lineNumber: 523,
+                            lineNumber: 661,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2355,13 +2634,13 @@ function LocalGame({ onBack }) {
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                            lineNumber: 535,
+                                            lineNumber: 673,
                                             columnNumber: 24
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                    lineNumber: 534,
+                                    lineNumber: 672,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2378,7 +2657,7 @@ function LocalGame({ onBack }) {
                                                             children: index + 1
                                                         }, void 0, false, {
                                                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                            lineNumber: 551,
+                                                            lineNumber: 689,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2386,13 +2665,13 @@ function LocalGame({ onBack }) {
                                                             children: result.player?.name
                                                         }, void 0, false, {
                                                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                            lineNumber: 559,
+                                                            lineNumber: 697,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                    lineNumber: 550,
+                                                    lineNumber: 688,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2403,24 +2682,24 @@ function LocalGame({ onBack }) {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                    lineNumber: 563,
+                                                    lineNumber: 701,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, result.playerId, true, {
                                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                            lineNumber: 540,
+                                            lineNumber: 678,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                    lineNumber: 538,
+                                    lineNumber: 676,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                            lineNumber: 533,
+                            lineNumber: 671,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2433,14 +2712,14 @@ function LocalGame({ onBack }) {
                                             className: "h-4 w-4 text-amber-500"
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                            lineNumber: 583,
+                                            lineNumber: 721,
                                             columnNumber: 15
                                         }, this),
                                         "Classement"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                    lineNumber: 582,
+                                    lineNumber: 720,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2458,7 +2737,7 @@ function LocalGame({ onBack }) {
                                                             children: index + 1
                                                         }, void 0, false, {
                                                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                            lineNumber: 598,
+                                                            lineNumber: 736,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2466,13 +2745,13 @@ function LocalGame({ onBack }) {
                                                             children: player.name
                                                         }, void 0, false, {
                                                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                            lineNumber: 608,
+                                                            lineNumber: 746,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                    lineNumber: 597,
+                                                    lineNumber: 735,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2483,24 +2762,24 @@ function LocalGame({ onBack }) {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                    lineNumber: 610,
+                                                    lineNumber: 748,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, player.id, true, {
                                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                            lineNumber: 590,
+                                            lineNumber: 728,
                                             columnNumber: 19
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                    lineNumber: 586,
+                                    lineNumber: 724,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                            lineNumber: 581,
+                            lineNumber: 719,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -2512,7 +2791,7 @@ function LocalGame({ onBack }) {
                                         className: "h-5 w-5 mr-2"
                                     }, void 0, false, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 619,
+                                        lineNumber: 757,
                                         columnNumber: 17
                                     }, this),
                                     "Résultats finaux"
@@ -2523,7 +2802,7 @@ function LocalGame({ onBack }) {
                                         className: "h-5 w-5 mr-2"
                                     }, void 0, false, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 624,
+                                        lineNumber: 762,
                                         columnNumber: 17
                                     }, this),
                                     "Manche suivante"
@@ -2531,19 +2810,19 @@ function LocalGame({ onBack }) {
                             }, void 0, true)
                         }, void 0, false, {
                             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                            lineNumber: 616,
+                            lineNumber: 754,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                    lineNumber: 515,
+                    lineNumber: 653,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-            lineNumber: 513,
+            lineNumber: 651,
             columnNumber: 7
         }, this);
     }
@@ -2567,12 +2846,12 @@ function LocalGame({ onBack }) {
                                     className: "h-10 w-10 text-amber-500"
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                    lineNumber: 644,
+                                    lineNumber: 782,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 643,
+                                lineNumber: 781,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -2580,7 +2859,7 @@ function LocalGame({ onBack }) {
                                 children: "Partie terminée !"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 646,
+                                lineNumber: 784,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2591,7 +2870,7 @@ function LocalGame({ onBack }) {
                                         children: winner?.name
                                     }, void 0, false, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 648,
+                                        lineNumber: 786,
                                         columnNumber: 15
                                     }, this),
                                     " gagne avec ",
@@ -2603,19 +2882,19 @@ function LocalGame({ onBack }) {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 648,
+                                        lineNumber: 786,
                                         columnNumber: 96
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 647,
+                                lineNumber: 785,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                        lineNumber: 642,
+                        lineNumber: 780,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2631,7 +2910,7 @@ function LocalGame({ onBack }) {
                                                 children: index + 1
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                lineNumber: 662,
+                                                lineNumber: 800,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2639,13 +2918,13 @@ function LocalGame({ onBack }) {
                                                 children: player.name
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                                lineNumber: 670,
+                                                lineNumber: 808,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 661,
+                                        lineNumber: 799,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2656,18 +2935,18 @@ function LocalGame({ onBack }) {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 672,
+                                        lineNumber: 810,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, player.id, true, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 654,
+                                lineNumber: 792,
                                 columnNumber: 15
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                        lineNumber: 652,
+                        lineNumber: 790,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2682,14 +2961,14 @@ function LocalGame({ onBack }) {
                                         className: "h-5 w-5 mr-2"
                                     }, void 0, false, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 679,
+                                        lineNumber: 817,
                                         columnNumber: 15
                                     }, this),
                                     "Accueil"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 678,
+                                lineNumber: 816,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$PredictWheel$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -2700,31 +2979,31 @@ function LocalGame({ onBack }) {
                                         className: "h-5 w-5 mr-2"
                                     }, void 0, false, {
                                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                        lineNumber: 683,
+                                        lineNumber: 821,
                                         columnNumber: 15
                                     }, this),
                                     "Rejouer"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                                lineNumber: 682,
+                                lineNumber: 820,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                        lineNumber: 677,
+                        lineNumber: 815,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-                lineNumber: 641,
+                lineNumber: 779,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/Desktop/PredictWheel/components/local-game.tsx",
-            lineNumber: 640,
+            lineNumber: 778,
             columnNumber: 7
         }, this);
     }

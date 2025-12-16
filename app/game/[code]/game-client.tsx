@@ -98,12 +98,16 @@ export function GameClient({ initialGameState }: GameClientProps) {
       )
       .subscribe()
 
-    // Polling fallback to ensure state is fresh even if websockets fail
-    const interval = setInterval(fetchLatestState, 1000)
+    // Polling fallback to ensure state is fresh even if websockets fail.
+    // Only poll here if we are waiting. Once playing, GamePlay handles polling.
+    let interval: NodeJS.Timeout
+    if (gameState.game.status === "waiting") {
+      interval = setInterval(fetchLatestState, 1000)
+    }
 
     return () => {
       supabase.removeChannel(channel)
-      clearInterval(interval)
+      if (interval) clearInterval(interval)
     }
   }, [gameState.game.id, supabase, sessionId, router, gameState.currentCard?.id, gameState.theme?.id, gameState.game])
 

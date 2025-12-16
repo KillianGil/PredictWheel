@@ -28,8 +28,30 @@ export function GamePlay({ initialGameState }: GamePlayProps) {
 
   const supabase = createClient()
   const currentPlayer = sessionId ? gameState.players.find((p) => p.session_id === sessionId) : undefined
+  const isHost = currentPlayer?.is_host
   const isPsychic = currentPlayer?.is_psychic
   const psychicPlayer = gameState.players.find((p) => p.is_psychic)
+
+  // Calcule la position à afficher sur la roue
+  // Si je joue (guessing), c'est mon state local.
+  // Si je suis psychique (reveal ou guessing terminé), je vois la position des autres.
+  // Pour simplifier : En 'reveal', on montre la moyenne des votes ?? Ou le vote du joueur si 2 joueurs.
+  // Le user dit "l'aiguille est pas placée". Prenons le premier guesser (cas 2 joueurs).
+  const guesserPlayer = gameState.players.find(p => !p.is_psychic)
+
+  let displayedGuessPosition = guessPosition
+  if (phase === "reveal") {
+    // En reveal, on montre le guess enregistré du joueur (surtout pour le Psychic qui le voit pas sinon)
+    // Si je suis le joueur, mon guessPosition local est bon (normalement). 
+    // Si je suis le psychic, je dois lire celui du joueur.
+    if (isPsychic && guesserPlayer?.guess_position !== null) {
+      displayedGuessPosition = guesserPlayer!.guess_position
+    }
+  } else if (phase === "guessing" && isPsychic && hasGuessed) {
+    // Si le joueur a deviné mais on n'est pas encore en reveal (attente ?)
+    // Le psychic ne voit RIEN tant que c'est pas validé/reveal ? 
+    // Le user dit "quand le joueur valide... l'aiguille est pas placée". C'est le reveal.
+  }
 
   useEffect(() => {
     // Set session ID on client only to avoid hydration mismatch
@@ -84,12 +106,26 @@ export function GamePlay({ initialGameState }: GamePlayProps) {
       )
       .subscribe()
 
-    // Fallback: Poll for updates every 2 seconds
+    // Fallback: Poll for updates every 1 seconds
     const pollInterval = setInterval(async () => {
       const { data: game } = await supabase.from("games").select("*").eq("id", gameState.game.id).single()
       const { data: players } = await supabase.from("game_players").select("*").eq("game_id", gameState.game.id)
 
       if (game && players) {
+        // ... (existing checks)
+
+        // HOST ONLY: Check if everyone is ready for Next Round
+        if (isHost && phase === "reveal") {
+          const everyoneReady = players.every(p => p.guess_position === 999)
+          // Need to ensure we don't trigger multiple times. currently triggerNextRound updates round count.
+          // game.current_round is from DB. gameState.game.current_round is local.
+          // If DB says round N, and we are ready for N+1.
+          if (everyoneReady) {
+            // Trigger!
+            triggerNextRound(players)
+          }
+        }
+
         // Check if clue was submitted
         if (game.current_clue && phase === "psychic") {
           setPhase("guessing")
@@ -97,8 +133,11 @@ export function GamePlay({ initialGameState }: GamePlayProps) {
 
         // Check if all guessed
         const nonPsychics = players.filter(p => !p.is_psychic)
-        const allGuessed = nonPsychics.every(p => p.guess_position !== null)
-        if (allGuessed && phase === "guessing" && nonPsychics.length > 0) {
+        // Ignore players who are "ready" (999) - wait, ready is only in reveal.
+        const activeGuessers = nonPsychics.filter(p => p.guess_position !== 999)
+        const allGuessed = activeGuessers.every(p => p.guess_position !== null)
+
+        if (allGuessed && phase === "guessing" && activeGuessers.length > 0) {
           setPhase("reveal")
         }
 
@@ -119,7 +158,7 @@ export function GamePlay({ initialGameState }: GamePlayProps) {
 
         setGameState(prev => ({ ...prev, game, players, currentCard }))
       }
-    }, 2000)
+    }, 1000)
 
     return () => {
       supabase.removeChannel(gameChannel)
@@ -178,25 +217,21 @@ export function GamePlay({ initialGameState }: GamePlayProps) {
     // Marquer le joueur comme prêt (999)
     await supabase.from("game_players").update({ guess_position: 999 }).eq("id", currentPlayer.id)
 
-    // Vérifier si tout le monde est prêt
-    const { data: allPlayers } = await supabase
-      .from("game_players")
-      .select("*")
-      .eq("game_id", gameState.game.id)
-
-    // Si tout le monde est à 999 ou null (psychic), on lance la prochaine manche
-    // Note: Le psychic n'a pas besoin de cliquer, ou alors on l'oblige aussi
-    // Disons que TOUS les joueurs doivent être prêts
-    const everyoneReady = allPlayers?.every(p => p.guess_position === 999)
-
-    if (everyoneReady) {
-      triggerNextRound(allPlayers)
-    }
+    // On ne trigger plus ici. Le polling du Host le fera.
   }
 
   const triggerNextRound = async (currentPlayers: typeof gameState.players) => {
     // Get a new card
-    const { data: cards } = await supabase.from("cards").select("*").eq("theme_id", gameState.theme?.id)
+    // Handle "random" theme (fetch all cards) or specific theme
+    let cards
+    if (!gameState.theme?.id || gameState.theme.id === "random" || gameState.theme.id === "tous") {
+      const { data } = await supabase.from("cards").select("*")
+      cards = data
+    } else {
+      const { data } = await supabase.from("cards").select("*").eq("theme_id", gameState.theme.id)
+      cards = data
+    }
+
     if (!cards || cards.length === 0) return
 
     const randomCard = cards[Math.floor(Math.random() * cards.length)]
@@ -268,7 +303,7 @@ export function GamePlay({ initialGameState }: GamePlayProps) {
               targetPosition={gameState.game.target_position ?? 90}
               showTarget={phase === "reveal" || (isPsychic && phase === "psychic")}
               showZones={phase === "reveal" || (isPsychic && phase === "psychic")}
-              guessPosition={phase === "guessing" || phase === "reveal" ? guessPosition : undefined}
+              guessPosition={phase === "guessing" || phase === "reveal" ? displayedGuessPosition : undefined}
               onGuessChange={setGuessPosition}
               interactive={!isPsychic && phase === "guessing" && !hasGuessed}
               leftExtreme={gameState.currentCard?.left_extreme || "Extrême gauche"}

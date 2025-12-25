@@ -1,5 +1,3 @@
-import { id } from "date-fns/locale";
-
 // Cartes locales en français pour le mode hors ligne
 export interface LocalCard {
   leftExtreme: string
